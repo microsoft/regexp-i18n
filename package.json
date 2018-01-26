@@ -4,7 +4,11 @@
   "description": "RegularExpression internationalization library",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jasmine"
+    "clean": "rimraf dist && rimraf .awcache",
+    "prepare": "npm run build",
+    "test": "karma start --singleRun --browsers ChromeHeadless",
+    "tslint": "tslint --project tsconfig.json -r tslint.json -r ./node_modules/tslint-microsoft-contrib --fix || true",
+    "build": "npm run clean && npm run tslint && tsc"
   },
   "keywords": [
     "regexp",
@@ -14,9 +18,20 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
+    "awesome-typescript-loader": "^3.4.1",
     "jasmine": "^2.9.0",
+    "jasmine-core": "^2.9.1",
     "jasmine-ts": "^0.2.1",
+    "karma": "^2.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.1",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "^0.0.32",
+    "karma-webpack": "^2.0.9",
     "tslint": "^5.9.1",
-    "typescript": "^2.6.2"
+    "tslint-microsoft-contrib": "^5.0.2",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0"
   }
 }

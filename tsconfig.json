@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "suppressImplicitAnyIndexErrors":  true,
+    "experimentalDecorators": true,
+    "noImplicitReturns": true,
+    "strict": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "noResolve": false,
+    "typeRoots": ["node_modules/@types"],
+    "module": "commonjs",
+    "outDir": "dist/",
+    "target": "es5",
+    "jsx": "react",
+  },
+
+  "awesomeTypescriptLoaderOptions": {
+    "useWebpackText": true,
+    "useCache": true,
+  },
+
+  "include": [
+    "src/**/*"
+  ],
+
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}
