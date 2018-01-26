@@ -1,0 +1,20 @@
+{
+  "name": "regexp-i18n",
+  "version": "0.0.1",
+  "description": "RegularExpression internationalization library",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "regexp",
+    "i18n"
+  ],
+  "author": "Microsoft",
+  "license": "MIT",
+  "devDependencies": {
+    "jasmine": "^2.9.0",
+    "tslint": "^5.9.1",
+    "typescript": "^2.6.2"
+  }
+}
