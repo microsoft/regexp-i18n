@@ -4,7 +4,7 @@
   "description": "RegularExpression internationalization library",
   "main": "dist/index.js",
   "scripts": {
-    "test": "test"
+    "test": "jasmine"
   },
   "keywords": [
     "regexp",
@@ -13,7 +13,9 @@
   "author": "Microsoft",
   "license": "MIT",
   "devDependencies": {
+    "@types/jasmine": "^2.8.6",
     "jasmine": "^2.9.0",
+    "jasmine-ts": "^0.2.1",
     "tslint": "^5.9.1",
     "typescript": "^2.6.2"
   }
