@@ -1,4 +1,15 @@
+# RegExpI18n library [![Build Status](https://travis-ci.org/Microsoft/regexp-i18n.svg?branch=master)](https://travis-ci.org/Microsoft/regexp-i18n)
+Library extends the standard JavaScript RegExp with \pL. It could be used insted of \w in order to match all available international alphabetical symbols.
+Usage example:
 
+```
+import RegExpI18n = require('regexp-i18n');
+
+const regexp = new RegExpI18n('[^\\pL');
+data = 'かなカナウィキペディア日本語版 345 &99';
+
+console.log(data.replace(regexp, '');
+```
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
