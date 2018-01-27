@@ -7,6 +7,7 @@
     "clean": "rimraf dist && rimraf .awcache",
     "prepare": "npm run build",
     "test": "karma start --singleRun --browsers ChromeHeadless",
+    "test:watch": "npm run clean && karma start --browsers Chrome",
     "tslint": "tslint --project tsconfig.json -r tslint.json -r ./node_modules/tslint-microsoft-contrib --fix || true",
     "build": "npm run clean && npm run tslint && tsc"
   },
