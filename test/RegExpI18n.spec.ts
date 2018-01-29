@@ -20,26 +20,26 @@ const specs: Spec[] = [
     { alphabet: 'Javanese', testText: 'ꦗꦮ'}, //80M+    
     { alphabet: 'Hangul', testText: '한글조선글'}, //80M+    
     { alphabet: 'Telugu', testText: 'తెలుగు'}, //74M+
-    //{ alphabet: 'Tamil', testText: 'தமிழ்'}, //60M+
+    { alphabet: 'Tamil', testText: 'தமிழ்'}, //60M+
     { alphabet: 'Gujarati', testText: 'ગુજરાતી'}, //48M+
-    //{ alphabet: 'Kannada', testText: 'ಕನ್ನಡ'}, // 45M+
-    //{ alphabet: 'Burmese', testText: 'မြန်မာ'}, //39M+
+    { alphabet: 'Kannada', testText: 'ಕನ್ನಡ'}, // 45M+
+    { alphabet: 'Burmese', testText: 'မြန်မာ'}, //39M+
     { alphabet: 'Malayalam', testText: 'മലയാളം'}, //38M+
     { alphabet: 'Thai', testText: 'ไทย'}, //38M+
-    //{ alphabet: 'Sundanese', testText: 'ᮞᮥᮔ᮪ᮓ'},
+    { alphabet: 'Sundanese', testText: 'ᮞᮥᮔ᮪ᮓ'},
     { alphabet: 'Gurmukhi', testText: 'ਗੁਰਮੁਖੀ'}, //22M+
     { alphabet: 'Lao', testText: 'ລາວ'}, // 22M+
-    //{ alphabet: 'Odia', testText: 'ଉତ୍କଳ'}, // 21M+
+    { alphabet: 'Odia', testText: 'ଉତ୍କଳ'}, // 21M+
     { alphabet: 'Ge\'ez', testText: 'ግዕዝ'},  // 18M
     { alphabet: 'Sinhalese', testText: 'සිංහල'}, // 14.4M
     { alphabet: 'Hebrew', testText: 'אלפבית'}, // 14M
     { alphabet: 'Armenian', testText: 'Հայոց'}, //12M
-    //{ alphabet: 'Khmer', testText: 'ខ្មែរ'}, // 11.4M
+    { alphabet: 'Khmer', testText: 'ខ្មែរ'}, // 11.4M
     { alphabet: 'Greek', testText: 'Ελληνικό'}, // 11M
-    //{ alphabet: 'Batak', testText: 'ᯅᯖᯂ᯲ᯆᯗᯂ᯳ᯅᯖᯃ᯳ᯅᯗᯂ᯲ᯅᯖᯄᯱ᯲'}, //8.5M
+    { alphabet: 'Batak', testText: 'ᯅᯖᯂ᯲ᯆᯗᯂ᯳ᯅᯖᯃ᯳ᯅᯗᯂ᯲ᯅᯖᯄᯱ᯲'}, //8.5M
     { alphabet: 'Lontara', testText: 'ᨒᨚᨈᨑ'}, // 5.6M
     { alphabet: 'Balinese', testText: 'ᬩᬮᬶ'}, // 6M
-    //{ alphabet: 'Tibetan', testText: 'བོད་'}, // 5M
+    { alphabet: 'Tibetan', testText: 'བོད་'}, // 5M
     { alphabet: 'Georgian', testText: 'ქართული'}, // 4.5M
     { alphabet: 'Modern Yi', testText: 'ꆈꌠ'}, // 4M
     { alphabet: 'Mongolian', testText: 'ᠮᠣᠩᠭᠣᠯ'}, // 2M
