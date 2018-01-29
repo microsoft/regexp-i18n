@@ -1,66 +1,81 @@
 import RegExpI18n = require('../src/RegExpI18n');
 
 interface Spec {
-    alphabet: string;
+    name: string;
     testText: string;
 }
 
 // Every spec represens separate langauge
 // Languages are ordered in the usage order
-const specs: Spec[] = [
-    { alphabet: 'Latin', testText: 'abcZYX' },
-    { alphabet: 'Latin suplemental', testText: 'ÀÊÖØåöøüÿ'},
-    { alphabet: 'Chinese', testText: '他走過城市的狗他的兄弟生氣了'},
-    { alphabet: 'Chinese Simplified', testText: '渔夫从远处看见一位渔夫罕见的字符'},
-    { alphabet: 'Arabic', testText: 'العربية', },  // 660M
-    { alphabet: 'Devenagari', testText: 'देवनागरीलिपि'}, //600M+
-    { alphabet: 'Eastern Nagari', testText: 'পৰবনগৰ'}, //300M+
-    { alphabet: 'Cyrillic', testText: 'НочьУлицаФонарьАптекаЃё'}, //250M+
-    { alphabet: 'Kana', testText: 'かなカナウィキペディア日本語版'}, //120M+   
-    { alphabet: 'Javanese', testText: 'ꦗꦮ'}, //80M+    
-    { alphabet: 'Hangul', testText: '한글조선글'}, //80M+    
-    { alphabet: 'Telugu', testText: 'తెలుగు'}, //74M+
-    { alphabet: 'Tamil', testText: 'தமிழ்'}, //60M+
-    { alphabet: 'Gujarati', testText: 'ગુજરાતી'}, //48M+
-    { alphabet: 'Kannada', testText: 'ಕನ್ನಡ'}, // 45M+
-    { alphabet: 'Burmese', testText: 'မြန်မာ'}, //39M+
-    { alphabet: 'Malayalam', testText: 'മലയാളം'}, //38M+
-    { alphabet: 'Thai', testText: 'ไทย'}, //38M+
-    { alphabet: 'Sundanese', testText: 'ᮞᮥᮔ᮪ᮓ'},
-    { alphabet: 'Gurmukhi', testText: 'ਗੁਰਮੁਖੀ'}, //22M+
-    { alphabet: 'Lao', testText: 'ລາວ'}, // 22M+
-    { alphabet: 'Odia', testText: 'ଉତ୍କଳ'}, // 21M+
-    { alphabet: 'Ge\'ez', testText: 'ግዕዝ'},  // 18M
-    { alphabet: 'Sinhalese', testText: 'සිංහල'}, // 14.4M
-    { alphabet: 'Hebrew', testText: 'אלפבית'}, // 14M
-    { alphabet: 'Armenian', testText: 'Հայոց'}, //12M
-    { alphabet: 'Khmer', testText: 'ខ្មែរ'}, // 11.4M
-    { alphabet: 'Greek', testText: 'Ελληνικό'}, // 11M
-    { alphabet: 'Batak', testText: 'ᯅᯖᯂ᯲ᯆᯗᯂ᯳ᯅᯖᯃ᯳ᯅᯗᯂ᯲ᯅᯖᯄᯱ᯲'}, //8.5M
-    { alphabet: 'Lontara', testText: 'ᨒᨚᨈᨑ'}, // 5.6M
-    { alphabet: 'Balinese', testText: 'ᬩᬮᬶ'}, // 6M
-    { alphabet: 'Tibetan', testText: 'བོད་'}, // 5M
-    { alphabet: 'Georgian', testText: 'ქართული'}, // 4.5M
-    { alphabet: 'Modern Yi', testText: 'ꆈꌠ'}, // 4M
-    { alphabet: 'Mongolian', testText: 'ᠮᠣᠩᠭᠣᠯ'}, // 2M
-    { alphabet: 'Tifinagh', testText: 'ⵜⵉⴼⵉⵏⴰⵖ'}, // 1M
-    { alphabet: 'Tai Le', testText: 'ᥖᥭᥰᥘᥫᥴ'}, // 0.75M
-    { alphabet: 'New Tai Lue', testText: 'ᦑᦟᦹᧉ'}, // 0.55M
-    { alphabet: 'Syriac', testText: 'ܣܘܪܝܬ'}, // 0.4M
-    { alphabet: 'Thaana', testText: 'ދިވެހި'}, // 
-    { alphabet: 'Inuktitut', testText: 'ᐃᓄᒃᑎᑐᑦ'}, //0.035M
-    { alphabet: 'Cherokee', testText: 'ᏣᎳᎩ'},  // 0.02M
-    { alphabet: 'Hanunó\'o', testText: 'ᜱᜨᜳᜨᜳᜢ'}, // 0.013M
+const smokeTests: Spec[] = [
+    { name: 'Latin', testText: 'abcZYX' },
+    { name: 'Latin suplemental', testText: 'ÀÊÖØåöøüÿ' },
+    { name: 'Chinese', testText: '他走過城市的狗他的兄弟生氣了' },
+    { name: 'Chinese Simplified', testText: '渔夫从远处看见一位渔夫罕见的字符' },
+    { name: 'Arabic', testText: 'العربية' },  // 660M
+    { name: 'Devenagari', testText: 'देवनागरीलिपि' }, //600M+
+    { name: 'Eastern Nagari', testText: 'পৰবনগৰ' }, //300M+
+    { name: 'Cyrillic', testText: 'НочьУлицаФонарьАптекаЃё' }, //250M+
+    { name: 'Kana', testText: 'かなカナウィキペディア日本語版' }, //120M+   
+    { name: 'Javanese', testText: 'ꦗꦮ' }, //80M+    
+    { name: 'Hangul', testText: '한글조선글' }, //80M+    
+    { name: 'Telugu', testText: 'తెలుగు' }, //74M+
+    { name: 'Tamil', testText: 'தமிழ்' }, //60M+
+    { name: 'Gujarati', testText: 'ગુજરાતી' }, //48M+
+    { name: 'Kannada', testText: 'ಕನ್ನಡ' }, // 45M+
+    { name: 'Burmese', testText: 'မြန်မာ' }, //39M+
+    { name: 'Malayalam', testText: 'മലയാളം' }, //38M+
+    { name: 'Thai', testText: 'ไทย' }, //38M+
+    { name: 'Sundanese', testText: 'ᮞᮥᮔ᮪ᮓ' },
+    { name: 'Gurmukhi', testText: 'ਗੁਰਮੁਖੀ' }, //22M+
+    { name: 'Lao', testText: 'ລາວ' }, // 22M+
+    { name: 'Odia', testText: 'ଉତ୍କଳ' }, // 21M+
+    { name: 'Ge\'ez', testText: 'ግዕዝ' },  // 18M
+    { name: 'Sinhalese', testText: 'සිංහල' }, // 14.4M
+    { name: 'Hebrew', testText: 'אלפבית' }, // 14M
+    { name: 'Armenian', testText: 'Հայոց' }, //12M
+    { name: 'Khmer', testText: 'ខ្មែរ' }, // 11.4M
+    { name: 'Greek', testText: 'Ελληνικό' }, // 11M
+    { name: 'Batak', testText: 'ᯅᯖᯂ᯲ᯆᯗᯂ᯳ᯅᯖᯃ᯳ᯅᯗᯂ᯲ᯅᯖᯄᯱ᯲' }, //8.5M
+    { name: 'Lontara', testText: 'ᨒᨚᨈᨑ' }, // 5.6M
+    { name: 'Balinese', testText: 'ᬩᬮᬶ' }, // 6M
+    { name: 'Tibetan', testText: 'བོད་' }, // 5M
+    { name: 'Georgian', testText: 'ქართული' }, // 4.5M
+    { name: 'Modern Yi', testText: 'ꆈꌠ' }, // 4M
+    { name: 'Mongolian', testText: 'ᠮᠣᠩᠭᠣᠯ' }, // 2M
+    { name: 'Tifinagh', testText: 'ⵜⵉⴼⵉⵏⴰⵖ' }, // 1M
+    { name: 'Tai Le', testText: 'ᥖᥭᥰᥘᥫᥴ' }, // 0.75M
+    { name: 'New Tai Lue', testText: 'ᦑᦟᦹᧉ' }, // 0.55M
+    { name: 'Syriac', testText: 'ܣܘܪܝܬ' }, // 0.4M
+    { name: 'Thaana', testText: 'ދިވެހި' }, // 
+    { name: 'Inuktitut', testText: 'ᐃᓄᒃᑎᑐᑦ' }, //0.035M
+    { name: 'Cherokee', testText: 'ᏣᎳᎩ' },  // 0.02M
+    { name: 'Hanunó\'o', testText: 'ᜱᜨᜳᜨᜳᜢ' }, // 0.013M
 ];
 
+// This tests should contain no letter symbols only
+const negativeTests: Spec[] = [
+    { name: 'digits', testText: '0123456789' },
+    { name: 'special', testText: '!@#$$%^&*()-=_+' }
+
+];
 // replace all not letter characters
-const testRegexp = new RegExpI18n('[^\\pL]', 'gi');
+const matchNoLetters = new RegExpI18n('[^\\pL]', 'g');
+
+const matchLetters = new RegExpI18n('[\\pL]', 'g');
 
 describe('SmokeTests', function () {
-    specs.forEach(spec => {
-        it(spec.alphabet, () => {
-            expect(spec.testText.replace(testRegexp, '')).toBe(spec.testText);
+    smokeTests.forEach(spec => {
+        it(spec.name, () => {
+            expect(spec.testText.replace(matchNoLetters, '')).toBe(spec.testText);
         });
     });
-    
+});
+
+describe('NegativeTests', function () {
+    negativeTests.forEach(spec => {
+        it(spec.name, () => {
+            expect(spec.testText.replace(matchLetters, '')).toBe(spec.testText);
+        });
+    });
 });
