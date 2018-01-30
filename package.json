@@ -19,6 +19,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jasmine": "^2.8.6",
+    "@types/lodash": "^4.14.98",
     "awesome-typescript-loader": "^3.4.1",
     "jasmine": "^2.9.0",
     "jasmine-core": "^2.9.1",
@@ -30,6 +31,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "^0.0.32",
     "karma-webpack": "^2.0.9",
+    "lodash": "^4.17.4",
     "tslint": "^5.9.1",
     "tslint-microsoft-contrib": "^5.0.2",
     "typescript": "^2.6.2",
