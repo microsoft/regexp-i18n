@@ -1,15 +1,25 @@
 # RegExpI18n library [![Build Status](https://travis-ci.org/Microsoft/regexp-i18n.svg?branch=master)](https://travis-ci.org/Microsoft/regexp-i18n)
-Library extends the standard JavaScript RegExp with \pL. It could be used insted of \w in order to match all available international alphabetical symbols.
+Library provides range of the all letters in Unicode.
+This ranges could be used in the RegExp as a part of the range. As ranges include astral symbols from astral pages you need to pass ~u~ flag to the regexp.
+
+Library tested on latest versons of Safari, Chrome, Firefox and Edge browsers.
+
 Usage example:
 
 ```
-import RegExpI18n = require('regexp-i18n');
+import { LETTERS } = from 'regexp-i18n';
 
-const regexp = new RegExpI18n('[^\\pL');
-data = 'かなカナウィキペディア日本語版 345 &99';
+const regexp = new RegExp('[^' + LETTERS + ']', 'gu');
+data = '他走過城市的狗他的兄弟生氣了 345 &99';
 
 console.log(data.replace(regexp, '');
 ```
+
+output will be:
+```
+他走過城市的狗他的兄弟生氣了
+```
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a

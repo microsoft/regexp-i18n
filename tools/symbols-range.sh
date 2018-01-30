@@ -4,7 +4,7 @@ SCRIPTPATH=$(realpath "$0")
 DIRNAME=$(dirname "$SCRIPTPATH")
 BIN="$DIRNAME/bin"
 if [[ ! -d $BIN ]]; then
-  mkdir $SCRIPTPATH/bin
+  mkdir $BIN
 fi
 javac $DIRNAME/*.java -d $BIN
 java -cp $BIN SymbolsRange

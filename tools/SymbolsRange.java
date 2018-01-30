@@ -1,7 +1,18 @@
+interface Predicate {
+    boolean test(int codepoint);
+}
+
 public class SymbolsRange {
 
+   private static Predicate ALPHA = new Predicate() {
+       @Override
+       public boolean test(int codepoint) {
+           return Character.isAlphabetic(codepoint);
+       }
+   };
+
     public static void main(String[] args) {
-        printRange();
+        printRange(ALPHA);
     }
 
     /**
@@ -12,7 +23,7 @@ public class SymbolsRange {
         int length = symbols.codePointCount(0, symbols.length());
         for (int i = 0; i < length; i++) {
             int codepoint = symbols.codePointAt(i);
-            System.out.println(Character.toChars(codepoint) + " : " + Character.isAlphabetic(codepoint) + " - " + Integer.toHexString(codepoint));
+            System.out.println(new String(Character.toChars(codepoint)) + " : " + Character.isAlphabetic(codepoint) + " - " + Integer.toHexString(codepoint));
         }
     }
 
@@ -26,14 +37,16 @@ public class SymbolsRange {
             result.append("\\x").append(hex);
         } else if (ch < 0x1000) {
             result.append("\\u0").append(hex);
-        } else {
+        } else if (ch < 0x10000){
             result.append("\\u").append(hex);
+        } else {
+            result.append("\\u").append('{').append(hex).append('}');
         }
         return result.toString();
     }
 
-    public static void printRange() {
-        StringBuilder result = new StringBuilder("[");
+    public static void printRange(Predicate predicate) {
+        StringBuilder result = new StringBuilder();
 
         int max = Character.MAX_CODE_POINT;
 
@@ -44,7 +57,7 @@ public class SymbolsRange {
         while (i < max) {
 
             while(i < max) {
-                if (Character.isAlphabetic(i)) {
+                if (predicate.test(i)) {
                     firstAlpha = i;
                     break;
                 }
@@ -53,7 +66,7 @@ public class SymbolsRange {
 
             while(i < max) {
                 boolean lastSymbol = i == max - 1;
-                if(!Character.isAlphabetic(i) || lastSymbol) {
+                if(!predicate.test(i) || lastSymbol) {
                     lastAlpha = lastSymbol ? i : i-1;
 
                     if (firstAlpha > firstAlpha) {
@@ -72,8 +85,6 @@ public class SymbolsRange {
             }
             i++;
         }
-
-        result.append(']');
 
         System.out.println(result.toString());
     }
