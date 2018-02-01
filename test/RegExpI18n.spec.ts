@@ -73,7 +73,7 @@ const testCases: TestCase[] = [
         pattern: '[' + LETTERS + ']' + '[' + MARKS + ']?',
         
         testFunction: function (spec: Spec) {            
-            const actual = replaceNotMatching(this.pattern, spec.testText);
+            const actual = replaceNotMatching(this.pattern, '', spec.testText);
             const expected = spec.expected ? spec.expected : spec.testText;
 
             expect(actual).toBe(expected);
@@ -89,13 +89,13 @@ const testCases: TestCase[] = [
         tests: _.cloneDeep(testData)
     },
 
-    /*
     {
-        name: 'StripNotAlphaDigit',        
-        regexp: new RegExp('[^\\d' + LETTERS + ']+$|^[^\\d' + LETTERS + ']+', 'gu'),
+        name: 'StripNotAlphaDigit',
+        pattern: '[^\\d' + LETTERS + MARKS + ']+$|^[^\\d' + LETTERS + MARKS + ']+',
+        //pattern: '^[a-zA-Z
 
         testFunction: function (spec: Spec) {
-            const actual = spec.testText.replace(this.regexp, '');
+            const actual = spec.testText.replace(new RegExp(this.pattern, 'gu'), '');
             const expected = spec.expected ? spec.expected : spec.testText;
 
             expect(actual).toBe(expected);
@@ -114,7 +114,7 @@ const testCases: TestCase[] = [
         },
 
         tests: _.cloneDeep(testData)
-    }*/
+    }
 ];
 
 testCases.forEach(testCase => {
