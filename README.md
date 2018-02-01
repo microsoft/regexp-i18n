@@ -24,13 +24,13 @@ console.log(data.replace(rx, ''));;
 1. `LETTERS` - all 18n letters
 1. `LETTERS_AND_DIACRITICS` - all i18n letters and diacritics
 1. `LETTERS_DIGITS_AND_DIACRITICS` - all i18n letters, digits and diacritics
-1. `DIACRITICS` - Special class of characters. Modifes previous character. Can't be stripped out without changing the text meaning.
+1. `DIACRITICS` - Special class of characters. Modifies previous character. Can't be stripped out without changing the text meaning.
 1. `DIGITS` - all i18n digits
 
 ## Patterns
 The patterns are regular expressions ranges well tested and reusable.
-1. `MATCH_LETTER` - Matches all 18n characters with diacritics. This is a strict pattern. All outstanding diacritics wan't be matched.
-1. `STRIP_SPECIAL` - Matches special characters in the begining and the end of the string. 
+1. `MATCH_LETTER` - Matches all 18n characters with diacritics. This is a strict pattern. All outstanding diacritics won't be matched.
+1. `STRIP_SPECIAL` - Matches special characters in the beginning and the end of the string. 
 
 
 ```
@@ -48,7 +48,7 @@ console.log(data.replace(rx, ''));;
 `replaceNotMatching(pattern: string, replaceValue: string, text: string): string;`
 
 Attempt to make a function replacing everythin not matching to the pattern.
-Motivation for it that it is impossible to make an inverse `MATCH_LETTER` pattern.
+The motivation for it that it is impossible to make an inverse `MATCH_LETTER` pattern.
 Not very reliable in the complex cases yet.
 
 # Contributing
