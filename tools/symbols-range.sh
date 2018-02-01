@@ -7,4 +7,4 @@ if [[ ! -d $BIN ]]; then
   mkdir $BIN
 fi
 javac $DIRNAME/*.java -d $BIN
-java -cp $BIN SymbolsRange
+java -cp $BIN com.microsoft.SymbolsRange
