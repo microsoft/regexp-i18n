@@ -44,7 +44,11 @@ const testData: Spec[] = [
     { name: 'Gujarati', testText: 'ગુજરાતી' }, //48M+
     { name: 'Kannada', testText: 'ಕನ್ನಡ' }, // 45M+
     { name: 'Burmese', testText: 'မြန်မာ' }, //39M+
-    { name: 'Malayalam', testText: 'മലയാളം' }, //38M+
+    {
+        name: 'Malayalam',
+        testText: 'മലയാളംഅഇഉഋഎഐഔഅംഅഃചഛഘചഠഷചന്ദ്രക്കല',
+        source: 'https://en.wikipedia.org/wiki/Virama see language mention'
+     }, //38M+
     { name: 'Thai', testText: 'ไทย' }, //38M+
     { name: 'Sundanese', testText: 'ᮞᮥᮔ᮪ᮓ' },
     { name: 'Gurmukhi', testText: 'ਗੁਰਮੁਖੀ' }, //22M+

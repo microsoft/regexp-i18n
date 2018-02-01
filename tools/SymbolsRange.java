@@ -11,6 +11,7 @@ public class SymbolsRange {
            and(TAMIL, MARKS),
            and(BURMESE, MARKS),
            and(KANNADA, MARKS),
+           and(MALAYALAM, MARKS),
            and(BURMESE, MARKS),
            and(SUNDANESE, MARKS),
            and(ODIA, MARKS),

@@ -19,6 +19,9 @@ public class UnicodeBlockPredicate implements Predicate {
     public static final UnicodeBlockPredicate KANNADA =
             new UnicodeBlockPredicate((UnicodeBlock.KANNADA));
 
+    public static final UnicodeBlockPredicate MALAYALAM =
+            new UnicodeBlockPredicate(UnicodeBlock.MALAYALAM);
+
     public static final UnicodeBlockPredicate BURMESE =
             new UnicodeBlockPredicate(UnicodeBlock.MYANMAR);
 
