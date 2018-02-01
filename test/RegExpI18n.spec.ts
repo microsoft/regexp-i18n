@@ -1,8 +1,6 @@
 import _ = require('lodash');
 
-import { LETTERS } from '../src/RegExpI18n';
-
-// /XRegExp.install('astral');
+import { LETTERS, MARKS, replaceNotMatching } from '../src/RegExpI18n';
 
 interface Spec {
     name: string;
@@ -13,7 +11,7 @@ interface Spec {
 
 interface TestCase {
     name: string;
-    regexp: RegExp;
+    pattern: string;
     tests: Spec[];
     testFunction: (spec: Spec) => void;
     setup?: () => void;
@@ -33,26 +31,27 @@ const testData: Spec[] = [
     { name: 'Javanese', testText: 'ꦗꦮ' }, //80M+    
     { name: 'Hangul', testText: '한글조선글' }, //80M+    
     { name: 'Telugu', testText: 'తెలుగు' }, //74M+
-    //{ name: 'Tamil', testText: 'நன்னூல்' }, //60M+
+    { name: 'Tamil', testText: 'நன்னூல்' }, //60M+
     { name: 'Gujarati', testText: 'ગુજરાતી' }, //48M+
-    //{ name: 'Kannada', testText: 'ಕನ್ನಡ' }, // 45M+
-    //{ name: 'Burmese', testText: 'မြန်မာ' }, //39M+
+    { name: 'Kannada', testText: 'ಕನ್ನಡ' }, // 45M+
+    { name: 'Burmese', testText: 'မြန်မာ' }, //39M+
     { name: 'Malayalam', testText: 'മലയാളം' }, //38M+
     { name: 'Thai', testText: 'ไทย' }, //38M+
-    //{ name: 'Sundanese', testText: 'ᮞᮥᮔ᮪ᮓ' },
+    { name: 'Sundanese', testText: 'ᮞᮥᮔ᮪ᮓ' },
     { name: 'Gurmukhi', testText: 'ਗੁਰਮੁਖੀ' }, //22M+
     { name: 'Lao', testText: 'ລາວ' }, // 22M+
-    //{ name: 'Odia', testText: 'ଉତ୍କଳ' }, // 21M+
+    { name: 'Odia', testText: 'ଉତ୍କଳ' }, // 21M+
     { name: 'Ge\'ez', testText: 'ግዕዝ' },  // 18M
     { name: 'Sinhalese', testText: 'සිංහල' }, // 14.4M
     { name: 'Hebrew', testText: 'אלפבית' }, // 14M
     { name: 'Armenian', testText: 'Հայոց' }, //12M
-    //{ name: 'Khmer', testText: 'ខ្មែរ' }, // 11.4M
+    { name: 'Khmer', testText: 'ខ្មែរ' }, // 11.4M
     { name: 'Greek', testText: 'Ελληνικό' }, // 11M
-    //{ name: 'Batak', testText: 'ᯅᯖᯂ᯲ᯆᯗᯂ᯳ᯅᯖᯃ᯳ᯅᯗᯂ᯲ᯅᯖᯄᯱ᯲' }, //8.5M
+    { name: 'Batak', testText: 'ᯅᯖᯂ᯲ᯆᯗᯂ᯳ᯅᯖᯃ᯳ᯅᯗᯂ᯲ᯅᯖᯄᯱ᯲' }, //8.5M
     { name: 'Lontara', testText: 'ᨒᨚᨈᨑ' }, // 5.6M
     { name: 'Balinese', testText: 'ᬩᬮᬶ' }, // 6M
-    //{ name: 'Tibetan', testText: 'བོད་' }, // 5M
+    // tslint:disable-next-line:max-line-length
+    { name: 'Tibetan', testText: 'ས藏文有三十个辅音字母具体如下表所示འ་ཆུངམཚམསམཐུན་འཚམསའཐུནདགེ་འདུནསྤྱིར་藏文音节འགྲེམས་སྟོན་结构规则要分析藏文结构必须先得找出根字母然后其他的部分根据结构规则就能找到' }, // 5M
     { name: 'Georgian', testText: 'ქართული' }, // 4.5M
     { name: 'Modern Yi', testText: 'ꆈꌠ' }, // 4M
     { name: 'Mongolian', testText: 'ᠮᠣᠩᠭᠣᠯ' }, // 2M
@@ -63,7 +62,7 @@ const testData: Spec[] = [
     { name: 'Thaana', testText: 'ދިވެހި' }, // 
     { name: 'Inuktitut', testText: 'ᐃᓄᒃᑎᑐᑦ' }, //0.035M
     { name: 'Cherokee', testText: 'ᏣᎳᎩ' },  // 0.02M
-    { name: 'Hanunó\'o', testText: 'ᜱᜨᜳᜨᜳᜢ' }, // 0.013M*/
+    { name: 'Hanunó\'o', testText: 'ᜱᜨᜳᜨᜳᜢ' }, // 0.013M
 
 ];
 
@@ -71,10 +70,10 @@ const testCases: TestCase[] = [
     {
         name: 'SmokeTests',
         // we replace all non letter characters
-        regexp: new RegExp('[^' + LETTERS + ']', 'gu'),
+        pattern: '[' + LETTERS + ']' + '[' + MARKS + ']?',
         
-        testFunction: function (spec: Spec) {
-            const actual = spec.testText.replace(this.regexp, '');
+        testFunction: function (spec: Spec) {            
+            const actual = replaceNotMatching(this.pattern, spec.testText);
             const expected = spec.expected ? spec.expected : spec.testText;
 
             expect(actual).toBe(expected);
@@ -90,6 +89,7 @@ const testCases: TestCase[] = [
         tests: _.cloneDeep(testData)
     },
 
+    /*
     {
         name: 'StripNotAlphaDigit',        
         regexp: new RegExp('[^\\d' + LETTERS + ']+$|^[^\\d' + LETTERS + ']+', 'gu'),
@@ -114,7 +114,7 @@ const testCases: TestCase[] = [
         },
 
         tests: _.cloneDeep(testData)
-    }
+    }*/
 ];
 
 testCases.forEach(testCase => {
