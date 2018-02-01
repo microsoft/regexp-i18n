@@ -7,6 +7,7 @@ import static com.microsoft.UnicodeBlockPredicate.*;
 public class SymbolsRange {
 
    private static Predicate EXTRA_LANGUAGES = or(
+           and(DEVANAGARI, MARKS),
            and(TAMIL, MARKS),
            and(BURMESE, MARKS),
            and(KANNADA, MARKS),
@@ -20,9 +21,9 @@ public class SymbolsRange {
    );
 
     public static void main(String[] args) {
-        printRange("Letter", ALPHA);
-        printRange("Extra", EXTRA_LANGUAGES);
-        printRange("Complete", or(ALPHA, EXTRA_LANGUAGES));
+        printRange("LETTERS", ALPHA);
+        printRange("MARKS", EXTRA_LANGUAGES);
+        printRange("LETTERS_COMPLETE", or(ALPHA, EXTRA_LANGUAGES));
     }
 
     /**
@@ -94,8 +95,8 @@ public class SymbolsRange {
      * @param predicate
      */
     public static void printRange(String name, Predicate predicate) {
-        System.out.println(name + ":");
-        StringBuilder result = new StringBuilder();
+        StringBuilder result = new StringBuilder("export const ");
+        result.append(name).append(" = '");
 
         int max = Character.MAX_CODE_POINT;
 
@@ -135,6 +136,7 @@ public class SymbolsRange {
             i++;
         }
 
+        result.append("';");
         System.out.println(result.toString());
     }
 }

@@ -1,6 +1,6 @@
 import _ = require('lodash');
 
-import { LETTERS, MARKS, replaceNotMatching } from '../src/RegExpI18n';
+import { LETTERS, LETTERS_COMPLETE, MARKS, replaceNotMatching } from '../src/RegExpI18n';
 
 interface Spec {
     name: string;
@@ -24,7 +24,7 @@ const testData: Spec[] = [
     { name: 'Chinese', testText: '他走過城市的狗他的兄弟生氣了' },
     { name: 'Chinese Simplified', testText: '渔夫从远处看见一位渔夫罕见的字符' },
     { name: 'Arabic', testText: 'العربية' },  // 660M
-    { name: 'Devenagari', testText: 'देवनागरीलिपि' }, //600M+
+    { name: 'Devenagari', testText: 'ण्कण्खण्गण्घ्ङण्चण्छ्जण्झण्ञण्टण्ठण्डण्ढण्णण्तण्थण्दण्धण्नण्पण्फण्बण्भण्मण्यण्र' }, //600M+
     { name: 'Eastern Nagari', testText: 'পৰবনগৰ' }, //300M+
     { name: 'Cyrillic', testText: 'НочьУлицаФонарьАптекаЃё' }, //250M+
     { name: 'Kana', testText: 'かなカナウィキペディア日本語版' }, //120M+   
@@ -91,7 +91,7 @@ const testCases: TestCase[] = [
 
     {
         name: 'StripNotAlphaDigit',
-        pattern: '[^\\d' + LETTERS + MARKS + ']+$|^[^\\d' + LETTERS + MARKS + ']+',
+        pattern: '[^\\d' + LETTERS_COMPLETE + ']+$|^[^\\d' + LETTERS_COMPLETE + ']+',
         //pattern: '^[a-zA-Z
 
         testFunction: function (spec: Spec) {

@@ -27,6 +27,9 @@ public class UnicodeBlockPredicate implements Predicate {
     public static final UnicodeBlockPredicate BATAK =
             new UnicodeBlockPredicate(UnicodeBlock.BATAK);
 
+    public static final UnicodeBlockPredicate DEVANAGARI =
+            new UnicodeBlockPredicate(UnicodeBlock.DEVANAGARI);
+
     public static final UnicodeBlockPredicate TIBETAN =
             new UnicodeBlockPredicate(UnicodeBlock.TIBETAN);
 
