@@ -27,7 +27,9 @@ public class SymbolsRange {
         printRange(ALPHA, "LETTERS", null);
         printRange(DIACRITICS, "DIACRITICS",
                 "Group of symbols which are not letters but mutate previous letter.");
+        printRange(DIGIT, "DIGITS");
         printRange(or(ALPHA, DIACRITICS), "LETTERS_AND_DIACRITICS");
+        printRange(or(ALPHA, DIACRITICS), "LETTERS_DIGITS_AND_DIACRITICS");
     }
 
     /**
@@ -55,6 +57,10 @@ public class SymbolsRange {
 
         System.out.println(String.format("%s %x %s type: %d %s",
                 view, codepoint, hex, type, block));
+    }
+
+    private static void printSymbol(int codepoint) {
+        System.out.print(new String(Character.toChars(codepoint)));
     }
 
     /**

@@ -16,6 +16,8 @@ public interface Predicate {
 
     Predicate LETTER = codepoint -> Character.isLetter(codepoint);
 
+    Predicate DIGIT = codepoint -> Character.isDigit(codepoint);
+
     Predicate MARKS = new Predicate() {
 
         final int MASK = ((1<<Character.NON_SPACING_MARK) |

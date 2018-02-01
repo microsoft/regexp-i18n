@@ -113,8 +113,8 @@ const testCases: TestCase[] = [
     },
 
     {
-        name: 'StripNotAlphaDigit',
-        pattern: Patterns.STRIP_NON_DIGITS,
+        name: 'StripSpecialCharacters',
+        pattern: Patterns.STRIP_SPECIAL,
         //pattern: '^[a-zA-Z
 
         testFunction: function (spec: Spec) {
