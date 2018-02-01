@@ -2,11 +2,16 @@ import _ = require('lodash');
 
 import { LETTERS, LETTERS_COMPLETE, MARKS, replaceNotMatching } from '../src/RegExpI18n';
 
+// tslint:disable:max-line-length
+
 interface Spec {
     name: string;
     testText: string;
     // if not specified the expected result is original string
     expected?: string;
+    // where testcase came from if not specified it is from https://en.wikipedia.org/wiki/List_of_writing_systems
+    // See List of writing scripts by adoption section.
+    source?: string;
 }
 
 interface TestCase {
@@ -50,8 +55,11 @@ const testData: Spec[] = [
     { name: 'Batak', testText: 'ᯅᯖᯂ᯲ᯆᯗᯂ᯳ᯅᯖᯃ᯳ᯅᯗᯂ᯲ᯅᯖᯄᯱ᯲' }, //8.5M
     { name: 'Lontara', testText: 'ᨒᨚᨈᨑ' }, // 5.6M
     { name: 'Balinese', testText: 'ᬩᬮᬶ' }, // 6M
-    // tslint:disable-next-line:max-line-length
-    { name: 'Tibetan', testText: 'ས藏文有三十个辅音字母具体如下表所示འ་ཆུངམཚམསམཐུན་འཚམསའཐུནདགེ་འདུནསྤྱིར་藏文音节འགྲེམས་སྟོན་结构规则要分析藏文结构必须先得找出根字母然后其他的部分根据结构规则就能找到' }, // 5M
+    { 
+        name: 'Tibetan', 
+        testText: 'ས藏文有三十个辅音字母具体如下表所示འ་ཆུངམཚམསམཐུན་འཚམསའཐུནདགེ་འདུནསྤྱིར་藏文音节འགྲེམས་སྟོན་结构规则要分析藏文结构必须先得找出根字母然后其他的部分根据结构规则就能找到',
+        source: 'https://w3c.github.io/tlreq/'
+    }, // 5M
     { name: 'Georgian', testText: 'ქართული' }, // 4.5M
     { name: 'Modern Yi', testText: 'ꆈꌠ' }, // 4M
     { name: 'Mongolian', testText: 'ᠮᠣᠩᠭᠣᠯ' }, // 2M
@@ -63,7 +71,6 @@ const testData: Spec[] = [
     { name: 'Inuktitut', testText: 'ᐃᓄᒃᑎᑐᑦ' }, //0.035M
     { name: 'Cherokee', testText: 'ᏣᎳᎩ' },  // 0.02M
     { name: 'Hanunó\'o', testText: 'ᜱᜨᜳᜨᜳᜢ' }, // 0.013M
-
 ];
 
 const testCases: TestCase[] = [
