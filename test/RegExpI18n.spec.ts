@@ -29,7 +29,11 @@ const testData: Spec[] = [
     { name: 'Chinese', testText: '他走過城市的狗他的兄弟生氣了' },
     { name: 'Chinese Simplified', testText: '渔夫从远处看见一位渔夫罕见的字符' },
     { name: 'Arabic', testText: 'العربية' },  // 660M
-    { name: 'Devenagari', testText: 'ण्कण्खण्गण्घ्ङण्चण्छ्जण्झण्ञण्टण्ठण्डण्ढण्णण्तण्थण्दण्धण्नण्पण्फण्बण्भण्मण्यण्र' }, //600M+
+    {
+        name: 'Devenagari',
+        testText: 'ण्कण्खण्गण्घ्ङण्चण्छ्जण्झण्ञण्टण्ठण्डण्ढण्णण्तण्थण्दण्धण्नण्पण्फण्बण्भण्मण्यण्रकेऐखक्फ',
+        source: 'https://en.wikipedia.org/wiki/Devanagari see Most Frequent Conjuncts'
+    }, //600M+
     { 
         name: 'Eastern Nagari', 
         testText: 'অঅআঅ্যাএ্যাঅৗইঈউঊ',
@@ -42,7 +46,11 @@ const testData: Spec[] = [
     { name: 'Telugu', testText: 'తెలుగు' }, //74M+
     { name: 'Tamil', testText: 'நன்னூல்' }, //60M+
     { name: 'Gujarati', testText: 'ગુજરાતી' }, //48M+
-    { name: 'Kannada', testText: 'ಕನ್ನಡ' }, // 45M+
+    { 
+        name: 'Kannada',
+        testText: 'ಕನ್ನಡೈಈ',
+        source: 'https://en.wikipedia.org/wiki/Kannada'
+     }, // 45M+
     { name: 'Burmese', testText: 'မြန်မာ' }, //39M+
     {
         name: 'Malayalam',
