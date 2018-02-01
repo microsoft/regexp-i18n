@@ -16,6 +16,7 @@ public class SymbolsRange {
            and(ODIA, MARKS),
            and(KHMER, MARKS),
            and(BATAK, MARKS),
+           and(EASTERN_NAGARI, MARKS),
            // Tibetian modifier
            and(codepoint(0x0f0b))
    );

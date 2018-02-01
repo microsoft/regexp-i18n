@@ -7,6 +7,12 @@ public class UnicodeBlockPredicate implements Predicate {
     public static final UnicodeBlockPredicate BASIC_LATIN =
             new UnicodeBlockPredicate(UnicodeBlock.BASIC_LATIN);
 
+    public static final UnicodeBlockPredicate EASTERN_NAGARI =
+            new UnicodeBlockPredicate(UnicodeBlock.BENGALI);
+
+    public static final UnicodeBlockPredicate SYLOTI_NAGRI =
+            new UnicodeBlockPredicate(UnicodeBlock.SYLOTI_NAGRI);
+
     public static final UnicodeBlockPredicate TAMIL =
             new UnicodeBlockPredicate(UnicodeBlock.TAMIL);
 

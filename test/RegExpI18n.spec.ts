@@ -30,7 +30,11 @@ const testData: Spec[] = [
     { name: 'Chinese Simplified', testText: '渔夫从远处看见一位渔夫罕见的字符' },
     { name: 'Arabic', testText: 'العربية' },  // 660M
     { name: 'Devenagari', testText: 'ण्कण्खण्गण्घ्ङण्चण्छ्जण्झण्ञण्टण्ठण्डण्ढण्णण्तण्थण्दण्धण्नण्पण्फण्बण्भण्मण्यण्र' }, //600M+
-    { name: 'Eastern Nagari', testText: 'পৰবনগৰ' }, //300M+
+    { 
+        name: 'Eastern Nagari', 
+        testText: 'অঅআঅ্যাএ্যাঅৗইঈউঊ',
+        source: 'https://en.wikipedia.org/wiki/Eastern_Nagari_script#Vowels'
+     }, //300M+
     { name: 'Cyrillic', testText: 'НочьУлицаФонарьАптекаЃё' }, //250M+
     { name: 'Kana', testText: 'かなカナウィキペディア日本語版' }, //120M+   
     { name: 'Javanese', testText: 'ꦗꦮ' }, //80M+    
