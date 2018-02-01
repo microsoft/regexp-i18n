@@ -6,50 +6,6 @@ import static com.microsoft.UnicodeBlockPredicate.*;
 
 public class SymbolsRange {
 
-   private static Predicate ALPHA = new Predicate() {
-
-        @Override
-        public boolean test(int codepoint) {
-            return Character.isAlphabetic(codepoint);
-        }
-    };
-
-   private static Predicate NOT_ALPHA_NUMERIC = new Predicate() {
-       @Override
-       public boolean test(int codepoint) {
-           return !Character.isAlphabetic(codepoint) && !Character.isDigit(codepoint);
-       }
-   };
-
-    private static Predicate OTHER_PUNCTUATION = new Predicate() {
-
-        @Override
-        public boolean test(int codepoint) {
-            int type = Character.getType(codepoint);
-            return type == Character.OTHER_PUNCTUATION;
-        }
-    };
-
-   private static Predicate MARKS = new Predicate() {
-
-       final int MASK = ((1<<Character.NON_SPACING_MARK) |
-               (1<<Character.ENCLOSING_MARK)   |
-               (1<<Character.COMBINING_SPACING_MARK));
-
-       @Override
-       public boolean test(int codepoint) {
-           int type = Character.getType(codepoint);
-           return (MASK & (1 << type)) != 0 && !Character.isAlphabetic(codepoint);
-       }
-   };
-
-   private static Predicate SPACE_SEPARATOR = new Predicate() {
-       @Override
-       public boolean test(int codepoint) {
-           return Character.getType(codepoint) == Character.SPACE_SEPARATOR;
-       }
-   };
-
    private static Predicate EXTRA_LANGUAGES = or(
            and(TAMIL, MARKS),
            and(BURMESE, MARKS),
@@ -66,6 +22,7 @@ public class SymbolsRange {
     public static void main(String[] args) {
         printRange("Alpha", ALPHA);
         printRange("Extra", EXTRA_LANGUAGES);
+        printRange("Complete", or(ALPHA, EXTRA_LANGUAGES));
     }
 
     /**
