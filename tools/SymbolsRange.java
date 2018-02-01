@@ -20,14 +20,16 @@ public class SymbolsRange {
    );
 
     public static void main(String[] args) {
-        printRange("Alpha", ALPHA);
+        printRange("Letter", ALPHA);
         printRange("Extra", EXTRA_LANGUAGES);
         printRange("Complete", or(ALPHA, EXTRA_LANGUAGES));
     }
 
     /**
-     * Function for doing temporary tests
-     * @param symbols
+     * Prints all codepoints in the string matching to the predicate.
+     *
+     * @param symbols to analyze
+     * @param p predicate to filter symbols
      */
     public static void printMatch(String symbols, Predicate p) {
         int length = symbols.codePointCount(0, symbols.length());
@@ -50,6 +52,11 @@ public class SymbolsRange {
                 view, codepoint, hex, type, block));
     }
 
+    /**
+     * Prints all valid codepoints in Unicode table matching to the predicate.
+     *
+     * @param p
+     */
     public static void printAll(Predicate p) {
         for (int i = 0; i < Character.MAX_CODE_POINT + 1; i++) {
             if (p.test(i)) {
@@ -58,17 +65,22 @@ public class SymbolsRange {
         }
     }
 
-    private static String code(int ch) {
+    /**
+     * Formats the codepoint to conform javascript range format
+     * @param codepoint
+     * @return
+     */
+    private static String code(int codepoint) {
         StringBuilder result = new StringBuilder();
-        String hex = Integer.toHexString(ch);
+        String hex = Integer.toHexString(codepoint);
 
-        if (ch < 128) {
-            result.append(Character.toString((char)ch));
-        } else if (ch < 256) {
+        if (codepoint < 128) {
+            result.append(Character.toString((char)codepoint));
+        } else if (codepoint < 256) {
             result.append("\\x").append(hex);
-        } else if (ch < 0x1000) {
+        } else if (codepoint < 0x1000) {
             result.append("\\u0").append(hex);
-        } else if (ch < 0x10000){
+        } else if (codepoint < 0x10000){
             result.append("\\u").append(hex);
         } else {
             result.append("\\u").append('{').append(hex).append('}');
@@ -76,6 +88,11 @@ public class SymbolsRange {
         return result.toString();
     }
 
+    /**
+     * Prints the ranges of the symbols matching to the given predicate
+     * @param name display name of the range
+     * @param predicate
+     */
     public static void printRange(String name, Predicate predicate) {
         System.out.println(name + ":");
         StringBuilder result = new StringBuilder();
