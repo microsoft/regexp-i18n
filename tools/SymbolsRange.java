@@ -6,7 +6,7 @@ import static com.microsoft.UnicodeBlockPredicate.*;
 
 public class SymbolsRange {
 
-   private static Predicate EXTRA_LANGUAGES = or(
+   private static Predicate DIACRITICS = or(
            and(DEVANAGARI, MARKS),
            and(TAMIL, MARKS),
            and(BURMESE, MARKS),
@@ -23,9 +23,11 @@ public class SymbolsRange {
    );
 
     public static void main(String[] args) {
-        printRange("LETTERS", ALPHA);
-        printRange("MARKS", EXTRA_LANGUAGES);
-        printRange("LETTERS_COMPLETE", or(ALPHA, EXTRA_LANGUAGES));
+        System.out.println("// Constants below are generated with ./tools/symbols-range.sh");
+        printRange(ALPHA, "LETTERS", null);
+        printRange(DIACRITICS, "DIACRITICS",
+                "Group of symbols which are not letters but mutate previous letter.");
+        printRange(or(ALPHA, DIACRITICS), "LETTERS_AND_DIACRITICS");
     }
 
     /**
@@ -91,13 +93,21 @@ public class SymbolsRange {
         return result.toString();
     }
 
+    public static void printRange(Predicate predicate, String name) {
+        printRange(predicate, name, null);
+    }
+
     /**
      * Prints the ranges of the symbols matching to the given predicate
-     * @param name display name of the range
      * @param predicate
+     * @param name display name of the range
+     * @param comment
      */
-    public static void printRange(String name, Predicate predicate) {
-        StringBuilder result = new StringBuilder("export const ");
+    public static void printRange(Predicate predicate, String name, String comment) {
+        if (comment != null) {
+            System.out.println("// " + comment);
+        }
+        StringBuilder result = new StringBuilder("const ");
         result.append(name).append(" = '");
 
         int max = Character.MAX_CODE_POINT;

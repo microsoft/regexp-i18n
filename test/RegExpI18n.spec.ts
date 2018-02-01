@@ -1,6 +1,6 @@
 import _ = require('lodash');
 
-import { LETTERS, LETTERS_COMPLETE, MARKS, replaceNotMatching } from '../src/RegExpI18n';
+import { Patterns, replaceNotMatching } from '../src/RegExpI18n';
 
 // tslint:disable:max-line-length
 
@@ -93,7 +93,7 @@ const testCases: TestCase[] = [
     {
         name: 'SmokeTests',
         // we replace all non letter characters
-        pattern: '[' + LETTERS + ']' + '[' + MARKS + ']?',
+        pattern: Patterns.MATCH_LETTER,
         
         testFunction: function (spec: Spec) {            
             const actual = replaceNotMatching(this.pattern, '', spec.testText);
@@ -114,7 +114,7 @@ const testCases: TestCase[] = [
 
     {
         name: 'StripNotAlphaDigit',
-        pattern: '[^\\d' + LETTERS_COMPLETE + ']+$|^[^\\d' + LETTERS_COMPLETE + ']+',
+        pattern: Patterns.STRIP_NON_DIGITS,
         //pattern: '^[a-zA-Z
 
         testFunction: function (spec: Spec) {
