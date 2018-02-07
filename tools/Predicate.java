@@ -31,6 +31,8 @@ public interface Predicate {
         }
     };
 
+    Predicate ASTRAL = codepoint -> codepoint > 0xfff;
+
     Predicate OTHER_PUNCTUATION = codepoint -> {
         int type = Character.getType(codepoint);
         return type == Character.OTHER_PUNCTUATION;

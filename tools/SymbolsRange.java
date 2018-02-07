@@ -24,12 +24,17 @@ public class SymbolsRange {
 
     public static void main(String[] args) {
         System.out.println("// Constants below are generated with ./tools/symbols-range.sh");
-        printRange(ALPHA, "LETTERS", null);
-        printRange(DIACRITICS, "DIACRITICS",
+        print(true);
+        print(false);
+    }
+
+    private static void print(boolean astral) {
+        printRange(astral, ALPHA, "LETTERS", null);
+        printRange(astral, DIACRITICS, "DIACRITICS",
                 "Group of symbols which are not letters but mutate previous letter.");
-        printRange(DIGIT, "DIGITS");
-        printRange(or(ALPHA, DIACRITICS), "LETTERS_AND_DIACRITICS");
-        printRange(or(ALPHA, DIACRITICS), "LETTERS_DIGITS_AND_DIACRITICS");
+        printRange(astral, DIGIT, "DIGITS");
+        printRange(astral, or(ALPHA, DIACRITICS), "LETTERS_AND_DIACRITICS");
+        printRange(astral, or(ALPHA, DIACRITICS), "LETTERS_DIGITS_AND_DIACRITICS");
     }
 
     /**
@@ -99,8 +104,8 @@ public class SymbolsRange {
         return result.toString();
     }
 
-    public static void printRange(Predicate predicate, String name) {
-        printRange(predicate, name, null);
+    public static void printRange(boolean astral, Predicate predicate, String name) {
+        printRange(astral, predicate, name, null);
     }
 
     /**
@@ -109,14 +114,19 @@ public class SymbolsRange {
      * @param name display name of the range
      * @param comment
      */
-    public static void printRange(Predicate predicate, String name, String comment) {
+    public static void printRange(boolean astral, Predicate predicate, String name, String comment) {
         if (comment != null) {
             System.out.println("// " + comment);
         }
         StringBuilder result = new StringBuilder("const ");
-        result.append(name).append(" = '");
+        result.append(name);
+        if (astral) {
+            result.append("_ASTRAL");
+        }
 
-        int max = Character.MAX_CODE_POINT;
+        result.append(" = '");
+
+        int max = astral ? Character.MAX_CODE_POINT : 0xFFFF;
 
         int i = 0;
         int firstAlpha = -1;
