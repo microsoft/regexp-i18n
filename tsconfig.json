@@ -15,7 +15,6 @@
     "module": "commonjs",
     "outDir": "dist/",
     "target": "es5",
-    "jsx": "react",
   },
 
   "awesomeTypescriptLoaderOptions": {

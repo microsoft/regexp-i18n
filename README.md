@@ -1,4 +1,5 @@
-# RegExpI18n library [![Build Status](https://travis-ci.org/Microsoft/regexp-i18n.svg?branch=master)](https://travis-ci.org/Microsoft/regexp-i18n)
+# RegExpI18n library [![Build Status](https://img.shields.io/travis/Microsoft/regexp-i18n/master.svg?style=flat-square)](https://travis-ci.org/Microsoft/regexp-i18n)
+
 Library provides range of the all letters in Unicode.
 This ranges could be used in the RegExp as a part of the range. As ranges include astral symbols from astral pages you need to pass ~u~ flag to the regexp.
 
@@ -11,16 +12,16 @@ The library exports following building blocks:
 ## Constants
 Constants represent range of the symbols. You could use any of the constants provided as a part of the range regexp expression.
 
-```
-import { Constants } = from 'regexp-i18n';
+```typescript
+import { Constants } from 'regexp-i18n';
 
 const matchLetterPattern: '[' + Constants.LETTERS + ']';
 const rx = new RegExp(matchLetterPattern, 'ug');
-let data = '他走過城市的狗他的兄弟生氣了123';
-// prints 123
-console.log(data.replace(rx, ''));;
 
+let data = '他走過城市的狗他的兄弟生氣了123';
+console.log(data.replace(rx, '')); // 123
 ```
+
 1. `LETTERS` - all 18n letters
 1. `LETTERS_AND_DIACRITICS` - all i18n letters and diacritics
 1. `LETTERS_DIGITS_AND_DIACRITICS` - all i18n letters, digits and diacritics
@@ -33,21 +34,22 @@ The patterns are regular expressions ranges well tested and reusable.
 1. `STRIP_SPECIAL` - Matches special characters in the beginning and the end of the string. 
 
 
-```
-import { Constants } = from 'regexp-i18n';
+```typescript
+import { Constants } from 'regexp-i18n';
 
 const rx = new RegExp(STRIP_SPECIAL, 'ug');
-let data = '$ಕನ್ನಡೈಈ123#';
-// prints ಕನ್ನಡೈಈ123
-console.log(data.replace(rx, ''));;
 
+let data = '$ಕನ್ನಡೈಈ123#';
+console.log(data.replace(rx, '')); // ಕನ್ನಡೈಈ123
 ```
 
 ## Functions
 
-`replaceNotMatching(pattern: string, replaceValue: string, text: string): string;`
+```typescript
+replaceNotMatching(pattern: string, replaceValue: string, text: string): string;
+```
 
-Attempt to make a function replacing everythin not matching to the pattern.
+Attempt to make a function replacing everything not matching to the pattern.
 The motivation for it that it is impossible to make an inverse `MATCH_LETTER` pattern.
 Not very reliable in the complex cases yet.
 
