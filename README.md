@@ -35,9 +35,9 @@ The patterns are regular expressions ranges well tested and reusable.
 
 
 ```typescript
-import { Constants } from 'regexp-i18n';
+import { Patterns } from 'regexp-i18n';
 
-const rx = new RegExp(STRIP_SPECIAL, 'ug');
+const rx = new RegExp(Patterns.STRIP_SPECIAL, 'ug');
 
 let data = '$ಕನ್ನಡೈಈ123#';
 console.log(data.replace(rx, '')); // ಕನ್ನಡೈಈ123
