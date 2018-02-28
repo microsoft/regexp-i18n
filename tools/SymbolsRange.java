@@ -4,6 +4,45 @@ import static com.microsoft.Predicate.*;
 import static com.microsoft.CompositePredicate.*;
 import static com.microsoft.UnicodeBlockPredicate.*;
 
+enum RangeType {
+    ASCII_ONLY {
+        @Override
+        int maxCodePoint() {
+            return 255;
+        }
+
+        @Override
+        String suffix() {
+            return "_ASCII";
+        }
+    },
+    I18N {
+        @Override
+        int maxCodePoint() {
+            return 0xFFFF;
+        }
+
+        @Override
+        String suffix() {
+            return "";
+        }
+    },
+    I18N_ASTRAL {
+        @Override
+        int maxCodePoint() {
+            return Character.MAX_CODE_POINT;
+        }
+
+        @Override
+        String suffix() {
+            return "_ASTRAL";
+        }
+    };
+
+    abstract int maxCodePoint();
+    abstract String suffix();
+}
+
 public class SymbolsRange {
 
    private static Predicate DIACRITICS = or(
@@ -24,17 +63,18 @@ public class SymbolsRange {
 
     public static void main(String[] args) {
         System.out.println("// Constants below are generated with ./tools/symbols-range.sh");
-        print(true);
-        print(false);
+        print(RangeType.I18N_ASTRAL);
+        print(RangeType.I18N);
+        print(RangeType.ASCII_ONLY);
     }
 
-    private static void print(boolean astral) {
-        printRange(astral, ALPHA, "LETTERS", null);
-        printRange(astral, DIACRITICS, "DIACRITICS",
+    private static void print(RangeType rangeType) {
+        printRange(rangeType, ALPHA, "LETTERS", null);
+        printRange(rangeType, DIACRITICS, "DIACRITICS",
                 "Group of symbols which are not letters but mutate previous letter.");
-        printRange(astral, DIGIT, "DIGITS");
-        printRange(astral, or(ALPHA, DIACRITICS), "LETTERS_AND_DIACRITICS");
-        printRange(astral, or(ALPHA, DIACRITICS), "LETTERS_DIGITS_AND_DIACRITICS");
+        printRange(rangeType, DIGIT, "DIGITS");
+        printRange(rangeType, or(ALPHA, DIACRITICS), "LETTERS_AND_DIACRITICS");
+        printRange(rangeType, or(ALPHA, DIACRITICS), "LETTERS_DIGITS_AND_DIACRITICS");
     }
 
     /**
@@ -104,8 +144,8 @@ public class SymbolsRange {
         return result.toString();
     }
 
-    public static void printRange(boolean astral, Predicate predicate, String name) {
-        printRange(astral, predicate, name, null);
+    public static void printRange(RangeType rangeType, Predicate predicate, String name) {
+        printRange(rangeType, predicate, name, null);
     }
 
     /**
@@ -114,19 +154,17 @@ public class SymbolsRange {
      * @param name display name of the range
      * @param comment
      */
-    public static void printRange(boolean astral, Predicate predicate, String name, String comment) {
+    public static void printRange(RangeType rangeType, Predicate predicate, String name, String comment) {
         if (comment != null) {
             System.out.println("// " + comment);
         }
         StringBuilder result = new StringBuilder("const ");
         result.append(name);
-        if (astral) {
-            result.append("_ASTRAL");
-        }
+        result.append(rangeType.suffix());
 
         result.append(" = '");
 
-        int max = astral ? Character.MAX_CODE_POINT : 0xFFFF;
+        int max = rangeType.maxCodePoint();
 
         int i = 0;
         int firstAlpha = -1;
