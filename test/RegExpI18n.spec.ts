@@ -128,10 +128,11 @@ const testCases: TestCase[] = [
             this.tests.forEach(test => {
 
                 const mid = test.testText.length / 2;
-                // adding number in the middle to make sure it is not stripped down
-                test.testText = test.testText.substring(0, mid) + '%' + test.testText.substring(mid);
+                // Adding characters which shouldn't be stripped out
+                test.testText =  1 + test.testText.substring(0, mid) + '%' + test.testText.substring(mid) + 2;
                 test.expected = test.testText;
-                // adding numbers around to make sure they are stripped down
+
+                // adding special characters around to make sure they are stripped out
                 test.testText = '#!' + test.testText + '^@';
             });
         },

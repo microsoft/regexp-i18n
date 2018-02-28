@@ -74,7 +74,7 @@ public class SymbolsRange {
                 "Group of symbols which are not letters but mutate previous letter.");
         printRange(rangeType, DIGIT, "DIGITS");
         printRange(rangeType, or(ALPHA, DIACRITICS), "LETTERS_AND_DIACRITICS");
-        printRange(rangeType, or(ALPHA, DIACRITICS), "LETTERS_DIGITS_AND_DIACRITICS");
+        printRange(rangeType, or(ALPHA, DIACRITICS, DIGIT), "LETTERS_DIGITS_AND_DIACRITICS");
     }
 
     /**
