@@ -16,9 +16,9 @@ The library exports following building blocks:
 Constants & Ranges represent range of the symbols. You could use any of the constants provided as a part of the range regexp expression. Ranges could be used as an argument for the trim function.
 
 ```typescript
-import { Constants, Ranges trim } from 'regexp-i18n';
+import { Constants, Ranges, trim } from 'regexp-i18n';
 
-const matchLetterPattern: '[' + Constants.LETTERS + ']';
+const matchLetterPattern = '[' + Constants.LETTERS + ']';
 const rx = new RegExp(matchLetterPattern, 'ug');
 
 let data = '他走過城市的狗他的兄弟生氣了123';
