@@ -43,7 +43,7 @@ enum RangeType {
     abstract String suffix();
 }
 
-enum Format {
+enum Formatter {
     STRING {
         @Override
         String definition(String name) {
@@ -146,16 +146,16 @@ public class SymbolsRange {
         print(RangeType.I18N);
 
         // Limit constant for Ranges
-        System.out.println("    CODE_POINT_LIMIT: " + Format.NUMERIC.range(0, Character.MAX_CODE_POINT) +
+        System.out.println("    CODE_POINT_LIMIT: " + Formatter.NUMERIC.range(0, Character.MAX_CODE_POINT) +
                 " as [number, number]");
         System.out.println("};");
         System.out.println("");
     }
 
     private static void print(RangeType rangeType) {
-        Format[] formats = rangeType == RangeType.I18N_ASTRAL ? new Format[] { Format.STRING, Format.NUMERIC } :
-            new Format[] { Format.STRING };
-        for (Format formatter : formats) {
+        Formatter[] formatters = rangeType == RangeType.I18N_ASTRAL ? new Formatter[] { Formatter.STRING, Formatter.NUMERIC } :
+            new Formatter[] { Formatter.STRING };
+        for (Formatter formatter : formatters) {
             printRange(rangeType, formatter,  ALPHA, "LETTERS");
             printRange(rangeType, formatter,  DIACRITICS, "DIACRITICS");
             printRange(rangeType, formatter,  DIGIT, "DIGITS");
@@ -235,11 +235,10 @@ public class SymbolsRange {
      * Prints the ranges of the symbols matching to the given predicate
      * @param predicate
      * @param name display name of the range
-     * @param comment
      */
-    public static void printRange(RangeType rangeType, Format format, Predicate predicate, String name) {
-        StringBuilder result = new StringBuilder(format.definition(name + rangeType.suffix()));
-        result.append(format.start());
+    public static void printRange(RangeType rangeType, Formatter formatter, Predicate predicate, String name) {
+        StringBuilder result = new StringBuilder(formatter.definition(name + rangeType.suffix()));
+        result.append(formatter.start());
 
         boolean hasPrevious = false;
 
@@ -269,14 +268,14 @@ public class SymbolsRange {
                     }
 
                     if (hasPrevious) {
-                        result.append(format.separator());
+                        result.append(formatter.separator());
                     }
 
                     if (lastAlpha != firstAlpha) {
-                        result.append(format.range(firstAlpha, lastAlpha));
+                        result.append(formatter.range(firstAlpha, lastAlpha));
                         hasPrevious = true;
                     } else {
-                        result.append(format.item(firstAlpha));
+                        result.append(formatter.item(firstAlpha));
                         hasPrevious = true;
                     }
                     break;
@@ -287,7 +286,7 @@ public class SymbolsRange {
             i++;
         }
 
-        result.append(format.end()).append(',');
+        result.append(formatter.end()).append(',');
         System.out.println(result.toString());
     }
 }
