@@ -15,14 +15,11 @@ export class Range {
         } else {
             let result = false;
             let index = _.sortedIndexBy(this._range, [val, val], item => item[1]);
-            if (index === this._range.length) {
-                result = false;
-            } else {
+            if (index !== this._range.length) {
                 const range = this._range[index];
                 result = _.inRange(val, range[0], range[1] + 1);
-            }
-            result = this._inverted ? !result : result;
-            return result;
+            } 
+            return this._inverted ? !result : result;
         }
     }
 

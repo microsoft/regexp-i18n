@@ -1,4 +1,4 @@
-import cloneDeep = require('lodash/cloneDeep');
+import _ = require('lodash');
 
 import { Patterns, Ranges, replaceNotMatching, trim } from '../src/RegExpI18n';
 
@@ -105,7 +105,7 @@ const testCases: TestCase[] = [
             });
         },
 
-        tests: cloneDeep(testData)
+        tests: _.cloneDeep(testData)
     },
 
     {
@@ -131,7 +131,7 @@ const testCases: TestCase[] = [
             });
         },
 
-        tests: cloneDeep(testData)
+        tests: _.cloneDeep(testData)
     },
 
     {
@@ -157,7 +157,7 @@ const testCases: TestCase[] = [
             });
         },
 
-        tests: cloneDeep(testData)
+        tests: _.cloneDeep(testData)
     },
 ];
 
