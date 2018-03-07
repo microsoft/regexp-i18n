@@ -30,11 +30,14 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "2.0.9",
-    "lodash": "4.17.5",
+    "lodash": "^4.17.5",
     "tslint": "5.9.1",
     "tslint-microsoft-contrib": "5.0.3",
     "typescript": "2.7.2",
     "webpack": "3.11.0"
+  },
+  "peerDependencies": {
+    "lodash": "^4.17.5"
   },
   "typings": "dist/RegExpI18n.d.ts",
   "typescript": {

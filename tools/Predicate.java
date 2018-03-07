@@ -7,7 +7,6 @@ public interface Predicate {
 
     Predicate FALSE = codepoint -> false;
 
-
     static Predicate codepoint(int cp) {
         return codepoint -> cp == codepoint;
     }

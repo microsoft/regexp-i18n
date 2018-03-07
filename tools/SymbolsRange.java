@@ -43,6 +43,83 @@ enum RangeType {
     abstract String suffix();
 }
 
+enum Formatter {
+    STRING {
+        @Override
+        String definition(String name) {
+            return "    " + name + ": ";
+        }
+
+        @Override
+        String item(int codePoint) {
+            return SymbolsRange.code(codePoint);
+        }
+
+        @Override
+        String range(int first, int last) {
+            return SymbolsRange.code(first) + '-' + SymbolsRange.code(last);
+        }
+
+        @Override
+        String start() {
+            return "'";
+        }
+
+        @Override
+        String end() {
+            return "'";
+        }
+
+        @Override
+        String separator() {
+            return "";
+        }
+    },
+
+    NUMERIC {
+        @Override
+        String definition(String name) {
+            return "    " + name + "_RANGE: ";
+        }
+
+        @Override
+        String item(int codePoint) {
+            return range(codePoint, codePoint);
+        }
+
+        @Override
+        String range(int first, int last) {
+            return "[" + first + ", " + last + "]";
+        }
+
+        @Override
+        String start() {
+            return "[";
+        }
+
+        @Override
+        String end() {
+            return "] as [number, number][]";
+        }
+
+        @Override
+        String separator() {
+            return ", ";
+        }
+    };
+
+    abstract String definition(String name);
+
+    abstract String item(int codePoint);
+
+    abstract String range(int first, int last);
+
+    abstract String start();
+    abstract String end();
+
+    abstract String separator();
+}
+
 public class SymbolsRange {
 
    private static Predicate DIACRITICS = or(
@@ -62,19 +139,29 @@ public class SymbolsRange {
    );
 
     public static void main(String[] args) {
+        System.out.println("// tslint:disable:max-line-length");
         System.out.println("// Constants below are generated with ./tools/symbols-range.sh");
+        System.out.println("export default {");
         print(RangeType.I18N_ASTRAL);
         print(RangeType.I18N);
-        print(RangeType.ASCII_ONLY);
+
+        // Limit constant for Ranges
+        System.out.println("    CODE_POINT_LIMIT: " + Formatter.NUMERIC.range(0, Character.MAX_CODE_POINT) +
+                " as [number, number]");
+        System.out.println("};");
+        System.out.println("");
     }
 
     private static void print(RangeType rangeType) {
-        printRange(rangeType, ALPHA, "LETTERS", null);
-        printRange(rangeType, DIACRITICS, "DIACRITICS",
-                "Group of symbols which are not letters but mutate previous letter.");
-        printRange(rangeType, DIGIT, "DIGITS");
-        printRange(rangeType, or(ALPHA, DIACRITICS), "LETTERS_AND_DIACRITICS");
-        printRange(rangeType, or(ALPHA, DIACRITICS, DIGIT), "LETTERS_DIGITS_AND_DIACRITICS");
+        Formatter[] formatters = rangeType == RangeType.I18N_ASTRAL ? new Formatter[] { Formatter.STRING, Formatter.NUMERIC } :
+            new Formatter[] { Formatter.STRING };
+        for (Formatter formatter : formatters) {
+            printRange(rangeType, formatter,  ALPHA, "LETTERS");
+            printRange(rangeType, formatter,  DIACRITICS, "DIACRITICS");
+            printRange(rangeType, formatter,  DIGIT, "DIGITS");
+            printRange(rangeType, formatter, or(ALPHA, DIACRITICS), "LETTERS_AND_DIACRITICS");
+            printRange(rangeType, formatter, or(ALPHA, DIACRITICS, DIGIT), "LETTERS_DIGITS_AND_DIACRITICS");
+        }
     }
 
     /**
@@ -126,7 +213,7 @@ public class SymbolsRange {
      * @param codepoint
      * @return
      */
-    private static String code(int codepoint) {
+    protected static String code(int codepoint) {
         StringBuilder result = new StringBuilder();
         String hex = Integer.toHexString(codepoint);
 
@@ -144,25 +231,16 @@ public class SymbolsRange {
         return result.toString();
     }
 
-    public static void printRange(RangeType rangeType, Predicate predicate, String name) {
-        printRange(rangeType, predicate, name, null);
-    }
-
     /**
      * Prints the ranges of the symbols matching to the given predicate
      * @param predicate
      * @param name display name of the range
-     * @param comment
      */
-    public static void printRange(RangeType rangeType, Predicate predicate, String name, String comment) {
-        if (comment != null) {
-            System.out.println("// " + comment);
-        }
-        StringBuilder result = new StringBuilder("const ");
-        result.append(name);
-        result.append(rangeType.suffix());
+    public static void printRange(RangeType rangeType, Formatter formatter, Predicate predicate, String name) {
+        StringBuilder result = new StringBuilder(formatter.definition(name + rangeType.suffix()));
+        result.append(formatter.start());
 
-        result.append(" = '");
+        boolean hasPrevious = false;
 
         int max = rangeType.maxCodePoint();
 
@@ -170,9 +248,9 @@ public class SymbolsRange {
         int firstAlpha = -1;
         int lastAlpha = -1;
 
-        while (i < max) {
+        while (i <= max) {
 
-            while(i < max) {
+            while(i <= max) {
                 if (predicate.test(i)) {
                     firstAlpha = i;
                     break;
@@ -180,8 +258,8 @@ public class SymbolsRange {
                 i++;
             }
 
-            while(i < max) {
-                boolean lastSymbol = i == max - 1;
+            while(i <= max) {
+                boolean lastSymbol = i == max;
                 if(!predicate.test(i) || lastSymbol) {
                     lastAlpha = lastSymbol ? i : i-1;
 
@@ -189,10 +267,16 @@ public class SymbolsRange {
                         throw new RuntimeException(firstAlpha + " > " + lastAlpha);
                     }
 
+                    if (hasPrevious) {
+                        result.append(formatter.separator());
+                    }
+
                     if (lastAlpha != firstAlpha) {
-                        result.append(code(firstAlpha) + '-' + code(lastAlpha));
+                        result.append(formatter.range(firstAlpha, lastAlpha));
+                        hasPrevious = true;
                     } else {
-                        result.append(code(firstAlpha));
+                        result.append(formatter.item(firstAlpha));
+                        hasPrevious = true;
                     }
                     break;
 
@@ -202,7 +286,7 @@ public class SymbolsRange {
             i++;
         }
 
-        result.append("';");
+        result.append(formatter.end()).append(',');
         System.out.println(result.toString());
     }
 }
