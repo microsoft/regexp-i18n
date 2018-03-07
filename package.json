@@ -36,6 +36,9 @@
     "typescript": "2.7.2",
     "webpack": "3.11.0"
   },
+  "peerDependencies": {
+    "lodash": "4.17.5"
+  },
   "typings": "dist/RegExpI18n.d.ts",
   "typescript": {
     "definition": "dist/RegExpI18n.d.ts"

@@ -1,6 +1,6 @@
 import cloneDeep = require('lodash/cloneDeep');
 
-import { Patterns, replaceNotMatching } from '../src/RegExpI18n';
+import { Patterns, Ranges, replaceNotMatching, trim } from '../src/RegExpI18n';
 
 // tslint:disable:max-line-length
 
@@ -15,8 +15,7 @@ interface Spec {
 }
 
 interface TestCase {
-    name: string;
-    pattern: string;
+    name: string;  
     tests: Spec[];
     testFunction: (spec: Spec) => void;
     setup?: () => void;
@@ -92,11 +91,8 @@ const testData: Spec[] = [
 const testCases: TestCase[] = [
     {
         name: 'SmokeTests',
-        // we replace all non letter characters
-        pattern: Patterns.MATCH_LETTER,
-        
         testFunction: function (spec: Spec) {            
-            const actual = replaceNotMatching(this.pattern, '', spec.testText);
+            const actual = replaceNotMatching(Patterns.MATCH_LETTER, '', spec.testText);
             const expected = spec.expected ? spec.expected : spec.testText;
 
             expect(actual).toBe(expected);
@@ -113,12 +109,10 @@ const testCases: TestCase[] = [
     },
 
     {
-        name: 'StripSpecialCharacters',
-        pattern: Patterns.STRIP_SPECIAL,
-        //pattern: '^[a-zA-Z
+        name: 'StripSpecialCharacters',       
 
         testFunction: function (spec: Spec) {
-            const actual = spec.testText.replace(new RegExp(this.pattern, 'gu'), '');
+            const actual = spec.testText.replace(new RegExp(Patterns.STRIP_SPECIAL, 'gu'), '');
             const expected = spec.expected ? spec.expected : spec.testText;
 
             expect(actual).toBe(expected);
@@ -138,7 +132,33 @@ const testCases: TestCase[] = [
         },
 
         tests: cloneDeep(testData)
-    }
+    },
+
+    {
+        name: 'TrimSpecialCharacters',
+
+        testFunction: function (spec: Spec) {
+            const actual = trim(spec.testText, Ranges.LETTERS_DIGITS_AND_DIACRITICS.invert());
+            const expected = spec.expected ? spec.expected : spec.testText;
+
+            expect(actual).toBe(expected);
+        },
+
+        setup: function() {
+            this.tests.forEach(test => {
+
+                const mid = test.testText.length / 2;
+                // Adding characters which shouldn't be stripped out
+                test.testText =  1 + test.testText.substring(0, mid) + '%' + test.testText.substring(mid) + 2;
+                test.expected = test.testText;
+
+                // adding special characters around to make sure they are stripped out
+                test.testText = '#!' + test.testText + '^@';
+            });
+        },
+
+        tests: cloneDeep(testData)
+    },
 ];
 
 testCases.forEach(testCase => {
