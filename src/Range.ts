@@ -1,4 +1,4 @@
-import * as _ from './lodashMini';
+import * as _ from 'lodash';
 export class Range {
     /**
      * 
@@ -28,7 +28,7 @@ export class Range {
     }
 
     invert(): Range {
-        const inverted = [] as [number, number][];
+        const inverted: [number, number][] = [];
 
         const length = this._range.length;
         for (let i = 0; i < length; i++) {

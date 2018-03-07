@@ -3,7 +3,7 @@ import { Range } from '../src/Range';
 describe('Range', () => {
     let range: Range;
     beforeAll(() => {
-        range = new Range([0, 70], [[2, 5], [10, 15], [32, 40], [50, 50]]).invert().invert();
+        range = new Range([0, 70], [[2, 2], [4, 5], [10, 15], [32, 40], [50, 50]]).invert().invert();
     });
 
     it('.in() left out of range', () => {
