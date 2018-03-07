@@ -1,3 +1,11 @@
+/**
+ * UnicodeBlockPredicate.java
+ *
+ * Copyright (c) Microsoft Corporation 2018. All rights reserved.
+ * Licensed under the MIT license
+ *
+ * Predicates for the unicode character blocks.
+ */
 package com.microsoft;
 
 import java.lang.Character.UnicodeBlock;

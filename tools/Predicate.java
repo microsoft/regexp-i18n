@@ -1,3 +1,11 @@
+/**
+ * Predicate.java
+ *
+ * Author: Sergei Dryganets
+ * Copyright: Microsoft 2018
+ *
+ * Set of the predicates to allow character filtering and grouping.
+ */
 package com.microsoft;
 
 public interface Predicate {

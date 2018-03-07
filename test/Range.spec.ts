@@ -1,3 +1,12 @@
+/**
+ * Range.spec.ts
+ * 
+ * Copyright (c) Microsoft Corporation 2018. All rights reserved.
+ * Licensed under the MIT license
+ *
+ * Range tests
+ */
+
 import { Range } from '../src/Range';
 const lowerLimit = 0;
 const upperLimit = 70;

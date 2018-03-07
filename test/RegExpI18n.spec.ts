@@ -1,3 +1,11 @@
+/**
+ * RegExpI18n.spec.ts
+ * 
+ * Copyright (c) Microsoft Corporation 2018. All rights reserved.
+ * Licensed under the MIT license.
+ * 
+ * Tests for RegExpI18n module
+ */
 import _ = require('lodash');
 
 import { Patterns, Ranges, replaceNotMatching, trim } from '../src/RegExpI18n';

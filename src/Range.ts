@@ -1,3 +1,11 @@
+/**
+ * Range.ts
+ * Author: Sergei Dryganets
+ * Copyright: Microsoft 2018
+ *
+ * Class provide an abstraction for an integer range.
+ */
+
 import * as _ from 'lodash';
 export class Range {
     /**

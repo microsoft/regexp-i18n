@@ -1,4 +1,15 @@
+/**
+ * SumbolsRange.java
+ *
+ * Copyright (c) Microsoft Corporation 2018. All rights reserved.
+ * Licensed under the MIT license
+ *
+ * Utility to generate range constants for I18NRegexp.
+ */
 package com.microsoft;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 import static com.microsoft.Predicate.*;
 import static com.microsoft.CompositePredicate.*;
@@ -139,8 +150,20 @@ public class SymbolsRange {
    );
 
     public static void main(String[] args) {
+        System.out.println(("/**"));
+        System.out.println(" * Constants.ts");
+        System.out.println(" *");
+        System.out.println(String.format(Locale.US,
+                " * Copyright (c) Microsoft Corporation %d. All rights reserved.",
+                Calendar.getInstance().get(Calendar.YEAR)));
+        System.out.println(" *");
+        System.out.println(" * Unicode range constants.");
+        System.out.println(" * Generated code. Do not modify!");
+        System.out.println(" * To regenerate - update java code in ./tools folder and run ./tools/symbols-range.sh");
+        System.out.println(" */");
+        System.out.println();
         System.out.println("// tslint:disable:max-line-length");
-        System.out.println("// Constants below are generated with ./tools/symbols-range.sh");
+        System.out.println();
         System.out.println("export default {");
         print(RangeType.I18N_ASTRAL);
         print(RangeType.I18N);
@@ -149,7 +172,6 @@ public class SymbolsRange {
         System.out.println("    CODE_POINT_LIMIT: " + Formatter.NUMERIC.range(0, Character.MAX_CODE_POINT) +
                 " as [number, number]");
         System.out.println("};");
-        System.out.println("");
     }
 
     private static void print(RangeType rangeType) {

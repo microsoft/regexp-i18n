@@ -1,3 +1,11 @@
+/**
+ * CompositePredicate.java
+ *
+ * Copyright (c) Microsoft Corporation 2018. All rights reserved.
+ * Licensed under the MIT license
+ *
+ * Composite predicate and common predicate composition functions.
+ */
 package com.microsoft;
 
 public class CompositePredicate implements Predicate {

@@ -1,3 +1,11 @@
+ /**
+ * RegExpI18n.ts
+ * 
+ * Copyright (c) Microsoft Corporation 2018. All rights reserved.
+ * Licensed under the MIT license
+ *
+ * I18N aware, reusable helper functions and constants for work with regular expressions and strings.
+ */
 import Const from './Constants';
 import { Range } from './Range';
 
@@ -27,6 +35,8 @@ export const Ranges = {
     LETTERS: new Range(Const.CODE_POINT_LIMIT, Const.LETTERS_ASTRAL_RANGE),
     LETTERS_AND_DIACRITICS: new Range(Const.CODE_POINT_LIMIT, Const.LETTERS_AND_DIACRITICS_ASTRAL_RANGE),
     LETTERS_DIGITS_AND_DIACRITICS: new Range(Const.CODE_POINT_LIMIT, Const.LETTERS_DIGITS_AND_DIACRITICS_ASTRAL_RANGE),
+    DIACRITICS: new Range(Const.CODE_POINT_LIMIT, Const.DIACRITICS_ASTRAL_RANGE),
+    DIGITS: new Range(Const.CODE_POINT_LIMIT, Const.DIGITS_ASTRAL_RANGE),
 };
 
 export const Patterns = {
