@@ -1,4 +1,6 @@
-# RegExpI18n library [![Build Status](https://img.shields.io/travis/Microsoft/regexp-i18n/master.svg?style=flat-square)](https://travis-ci.org/Microsoft/regexp-i18n)
+# RegExpI18n library
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Microsoft/regexp-i18n/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/regexp-i18n.svg?style=flat-square)](https://www.npmjs.com/package/regexp-i18n) [![npm downloads](https://img.shields.io/npm/dm/regexp-i18n.svg?style=flat-square)](https://www.npmjs.com/package/regexp-i18n) [![Build Status](https://img.shields.io/travis/Microsoft/regexp-i18n/master.svg?style=flat-square)](https://travis-ci.org/Microsoft/regexp-i18n) [![David](https://img.shields.io/david/Microsoft/regexp-i18n.svg?style=flat-square)](https://github.com/Microsoft/regexp-i18n) [![David](https://img.shields.io/david/dev/Microsoft/regexp-i18n.svg?style=flat-square)](https://github.com/Microsoft/regexp-i18n)
 
 Library provides range of the all letters in Unicode.
 This ranges could be used in the RegExp as a part of the range. As ranges include astral symbols from astral pages you need to pass ~u~ flag to the regexp.

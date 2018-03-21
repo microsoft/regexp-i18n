@@ -4,9 +4,9 @@
   "description": "RegularExpression internationalization library",
   "main": "dist/RegExpI18n.js",
   "scripts": {
-    "clean": "rimraf dist && rimraf .awcache",
+    "clean": "rimraf dist",
     "prepare": "npm run build",
-    "test": "karma start --singleRun",
+    "test": "npm run clean && karma start --singleRun",
     "test:watch": "npm run clean && karma start",
     "tslint": "tslint --project tsconfig.json -r tslint.json -r ./node_modules/tslint-microsoft-contrib --fix || true",
     "build": "npm run clean && npm run tslint && tsc"
@@ -19,22 +19,24 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jasmine": "2.8.6",
-    "@types/lodash": "4.14.104",
-    "awesome-typescript-loader": "3.4.1",
-    "jasmine": "2.9.0",
-    "jasmine-core": "2.99.1",
+    "@types/lodash": "4.14.105",
+    "fork-ts-checker-webpack-plugin": "0.4.1",
+    "jasmine": "3.1.0",
+    "jasmine-core": "3.1.0",
     "karma": "2.0.0",
     "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "1.1.1",
-    "karma-jasmine-html-reporter": "0.2.2",
+    "karma-jasmine-html-reporter": "1.0.0",
     "karma-sourcemap-loader": "0.3.7",
     "karma-spec-reporter": "0.0.32",
-    "karma-webpack": "2.0.9",
+    "karma-webpack": "4.0.0-beta.0",
     "lodash": "^4.17.5",
+    "rimraf": "2.6.2",
+    "ts-loader": "4.1.0",
     "tslint": "5.9.1",
     "tslint-microsoft-contrib": "5.0.3",
     "typescript": "2.7.2",
-    "webpack": "3.11.0"
+    "webpack": "4.1.1"
   },
   "peerDependencies": {
     "lodash": "^4.17.5"

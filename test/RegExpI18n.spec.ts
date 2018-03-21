@@ -1,9 +1,9 @@
 /**
  * RegExpI18n.spec.ts
- * 
+ *
  * Copyright (c) Microsoft Corporation 2018. All rights reserved.
  * Licensed under the MIT license.
- * 
+ *
  * Tests for RegExpI18n module
  */
 import _ = require('lodash');
@@ -23,7 +23,7 @@ interface Spec {
 }
 
 interface TestCase {
-    name: string;  
+    name: string;
     tests: Spec[];
     testFunction: (spec: Spec) => void;
     setup?: () => void;
@@ -41,19 +41,19 @@ const testData: Spec[] = [
         testText: 'ण्कण्खण्गण्घ्ङण्चण्छ्जण्झण्ञण्टण्ठण्डण्ढण्णण्तण्थण्दण्धण्नण्पण्फण्बण्भण्मण्यण्रकेऐखक्फ',
         source: 'https://en.wikipedia.org/wiki/Devanagari see Most Frequent Conjuncts'
     }, //600M+
-    { 
-        name: 'Eastern Nagari', 
+    {
+        name: 'Eastern Nagari',
         testText: 'অঅআঅ্যাএ্যাঅৗইঈউঊ',
         source: 'https://en.wikipedia.org/wiki/Eastern_Nagari_script#Vowels'
      }, //300M+
     { name: 'Cyrillic', testText: 'НочьУлицаФонарьАптекаЃё' }, //250M+
-    { name: 'Kana', testText: 'かなカナウィキペディア日本語版' }, //120M+   
-    { name: 'Javanese', testText: 'ꦗꦮ' }, //80M+    
-    { name: 'Hangul', testText: '한글조선글' }, //80M+    
+    { name: 'Kana', testText: 'かなカナウィキペディア日本語版' }, //120M+
+    { name: 'Javanese', testText: 'ꦗꦮ' }, //80M+
+    { name: 'Hangul', testText: '한글조선글' }, //80M+
     { name: 'Telugu', testText: 'తెలుగు' }, //74M+
     { name: 'Tamil', testText: 'நன்னூல்' }, //60M+
     { name: 'Gujarati', testText: 'ગુજરાતી' }, //48M+
-    { 
+    {
         name: 'Kannada',
         testText: 'ಕನ್ನಡೈಈ',
         source: 'https://en.wikipedia.org/wiki/Kannada'
@@ -78,8 +78,8 @@ const testData: Spec[] = [
     { name: 'Batak', testText: 'ᯅᯖᯂ᯲ᯆᯗᯂ᯳ᯅᯖᯃ᯳ᯅᯗᯂ᯲ᯅᯖᯄᯱ᯲' }, //8.5M
     { name: 'Lontara', testText: 'ᨒᨚᨈᨑ' }, // 5.6M
     { name: 'Balinese', testText: 'ᬩᬮᬶ' }, // 6M
-    { 
-        name: 'Tibetan', 
+    {
+        name: 'Tibetan',
         testText: 'ས藏文有三十个辅音字母具体如下表所示འ་ཆུངམཚམསམཐུན་འཚམསའཐུནདགེ་འདུནསྤྱིར་藏文音节འགྲེམས་སྟོན་结构规则要分析藏文结构必须先得找出根字母然后其他的部分根据结构规则就能找到',
         source: 'https://w3c.github.io/tlreq/'
     }, // 5M
@@ -90,7 +90,7 @@ const testData: Spec[] = [
     { name: 'Tai Le', testText: 'ᥖᥭᥰᥘᥫᥴ' }, // 0.75M
     { name: 'New Tai Lue', testText: 'ᦑᦟᦹᧉ' }, // 0.55M
     { name: 'Syriac', testText: 'ܣܘܪܝܬ' }, // 0.4M
-    { name: 'Thaana', testText: 'ދިވެހި' }, // 
+    { name: 'Thaana', testText: 'ދިވެހި' }, //
     { name: 'Inuktitut', testText: 'ᐃᓄᒃᑎᑐᑦ' }, //0.035M
     { name: 'Cherokee', testText: 'ᏣᎳᎩ' },  // 0.02M
     { name: 'Hanunó\'o', testText: 'ᜱᜨᜳᜨᜳᜢ' }, // 0.013M
@@ -99,7 +99,7 @@ const testData: Spec[] = [
 const testCases: TestCase[] = [
     {
         name: 'SmokeTests',
-        testFunction: function (spec: Spec) {            
+        testFunction: function (spec: Spec) {
             const actual = replaceNotMatching(Patterns.MATCH_LETTER, '', spec.testText);
             const expected = spec.expected ? spec.expected : spec.testText;
 
@@ -117,7 +117,7 @@ const testCases: TestCase[] = [
     },
 
     {
-        name: 'StripSpecialCharacters',       
+        name: 'StripSpecialCharacters',
 
         testFunction: function (spec: Spec) {
             const actual = spec.testText.replace(new RegExp(Patterns.STRIP_SPECIAL, 'gu'), '');

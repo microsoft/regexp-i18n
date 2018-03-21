@@ -9,7 +9,7 @@
 import * as _ from 'lodash';
 export class Range {
     /**
-     * 
+     *
      * @param _limits inclusive limits. All numbers outside of it are nor in nor out of the range
      * @param _range range inside of the limits. All ranges are inclusive.
      */
@@ -26,7 +26,7 @@ export class Range {
             if (index !== this._range.length) {
                 const range = this._range[index];
                 result = _.inRange(val, range[0], range[1] + 1);
-            } 
+            }
             return this._inverted ? !result : result;
         }
     }
