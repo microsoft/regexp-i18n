@@ -1,5 +1,5 @@
 const context = require
-    .context('../test/', true, /\.spec\.tsx?$/);
+    .context('../test/', true, /\.spec\.ts$/);
 
 context
     .keys()

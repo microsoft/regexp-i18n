@@ -1,6 +1,6 @@
 /**
  * Range.spec.ts
- * 
+ *
  * Copyright (c) Microsoft Corporation 2018. All rights reserved.
  * Licensed under the MIT license
  *
@@ -12,7 +12,7 @@ const lowerLimit = 0;
 const upperLimit = 70;
 
 const range = new Range([0, 70], [[2, 2], [4, 5], [10, 15], [32, 40], [50, 50]]);
-let invertedRange = range.invert();
+const invertedRange = range.invert();
 
 function testIn(val: number, expected: boolean) {
     expect(range.in(val)).toBe(expected);

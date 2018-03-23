@@ -37,7 +37,7 @@ module.exports = config => (
         logLevel: config.LOG_INFO,
         colors: true,
         mime: {
-            'text/x-typescript': ['ts', 'tsx'],
+            'text/x-typescript': ['ts'],
         },
 
         webpack,
