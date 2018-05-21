@@ -179,6 +179,7 @@ public class SymbolsRange {
             new Formatter[] { Formatter.STRING };
         for (Formatter formatter : formatters) {
             printRange(rangeType, formatter,  ALPHA, "LETTERS");
+            printRange(rangeType, formatter,  IGNORABLE, "IGNORABLE_SYMBOLS");
             printRange(rangeType, formatter,  DIACRITICS, "DIACRITICS");
             printRange(rangeType, formatter,  DIGIT, "DIGITS");
             printRange(rangeType, formatter, or(ALPHA, DIACRITICS), "LETTERS_AND_DIACRITICS");
