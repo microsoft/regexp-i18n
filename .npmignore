@@ -1,5 +1,3 @@
-LICENSE
-README.md
 !dist
 karma
 karma.conf.js
@@ -9,5 +7,8 @@ src
 test
 tools
 tsconfig.json
+tsconfig.test.json
 tslint.json
 yarn.lock
+.travis.yml
+regexp-i18n-*.tgz
