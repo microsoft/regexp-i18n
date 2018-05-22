@@ -43,10 +43,7 @@ export const Ranges = {
 
 export const Patterns = {
     // Strict letter pattern. Won't match outstanding diacritics
-    MATCH_LETTER: '[' + Constants.LETTERS + ']' + '[' + Constants.DIACRITICS + ']?', 
-    // Uses not strict letter pattern. Will not remove outstanding diacritics.
-    // @deprecated Use trim(text, Ranges.LETTERS_DIGITS_AND_DIACRITICS.invert()) instead.
-    STRIP_SPECIAL: '[^' + Constants.LETTERS_DIGITS_AND_DIACRITICS + ']+$|^[^' + Constants.LETTERS_DIGITS_AND_DIACRITICS + ']+'
+    MATCH_LETTER: '[' + Constants.LETTERS + ']' + '[' + Constants.DIACRITICS + ']?',
 };
 
 export function createRegExp(pattern: string, flags?: string) {

@@ -117,32 +117,6 @@ const testCases: TestCase[] = [
     },
 
     {
-        name: 'StripSpecialCharacters',
-
-        testFunction: function (spec: Spec) {
-            const actual = spec.testText.replace(new RegExp(Patterns.STRIP_SPECIAL, 'gu'), '');
-            const expected = spec.expected ? spec.expected : spec.testText;
-
-            expect(actual).toBe(expected);
-        },
-
-        setup: function() {
-            this.tests.forEach(test => {
-
-                const mid = test.testText.length / 2;
-                // Adding characters which shouldn't be stripped out
-                test.testText =  1 + test.testText.substring(0, mid) + '%' + test.testText.substring(mid) + 2;
-                test.expected = test.testText;
-
-                // adding special characters around to make sure they are stripped out
-                test.testText = '#!' + test.testText + '^@';
-            });
-        },
-
-        tests: _.cloneDeep(testData)
-    },
-
-    {
         name: 'TrimSpecialCharacters',
 
         testFunction: function (spec: Spec) {

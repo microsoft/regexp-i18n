@@ -40,15 +40,14 @@ console.log(trim(data, Ranges.LETTERS)); // 123
 The patterns are regular expressions ranges well tested and reusable.
 
 1. `MATCH_LETTER` - Matches all 18n characters with diacritics. This is a strict pattern. All outstanding diacritics won't be matched.
-1. `STRIP_SPECIAL` - Matches special characters in the beginning and the end of the string. Deprecated. Use trim(text, Ranges.LETTERS_DIGITS_AND_DIACRITICS.invert()) instead.
 
 ```typescript
 import { Patterns } from 'regexp-i18n';
 
-const rx = new RegExp(Patterns.STRIP_SPECIAL, 'ug');
+const rx = new RegExp(Patterns.MATCH_LETTER, 'ug');
 
 let data = '$ಕನ್ನಡೈಈ123#';
-console.log(data.replace(rx, '')); // ಕನ್ನಡೈಈ123
+console.log(data.replace(rx, '')); // 123#
 ```
 
 ### Functions
