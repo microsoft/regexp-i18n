@@ -33,6 +33,7 @@ console.log(trim(data, Ranges.LETTERS)); // 123
 1. `LETTERS_DIGITS_AND_DIACRITICS` - all i18n letters, digits and diacritics
 1. `DIACRITICS` - Special class of characters. Modifies previous character. Can't be stripped out without changing the text meaning.
 1. `DIGITS` - all i18n digits
+1. `IGNORABLE_SYMBOLS` - all ignorable unicode symbols.
 
 ### Patterns
 

@@ -21,6 +21,8 @@ public interface Predicate {
 
     Predicate ALPHA = codepoint -> Character.isAlphabetic(codepoint);
 
+    Predicate IGNORABLE = codepoint -> Character.isIdentifierIgnorable(codepoint);
+
     Predicate LETTER = codepoint -> Character.isLetter(codepoint);
 
     Predicate DIGIT = codepoint -> Character.isDigit(codepoint);
