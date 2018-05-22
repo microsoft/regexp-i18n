@@ -40,6 +40,7 @@ console.log(trim(data, Ranges.LETTERS)); // 123
 The patterns are regular expressions ranges well tested and reusable.
 
 1. `MATCH_LETTER` - Matches all 18n characters with diacritics. This is a strict pattern. All outstanding diacritics won't be matched.
+1. `MATCH_IGNORABLE_SYMBOLS` - Matches ignorable unicode symbols. These symbols are usually are not visible and could be ignored.
 
 ```typescript
 import { Patterns } from 'regexp-i18n';

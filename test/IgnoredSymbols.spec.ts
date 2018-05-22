@@ -7,9 +7,9 @@
  * Ignored Symbols tests
  */
 
-import { Constants, createRegExp } from '../src/RegExpI18n';
+import { createRegExp, Patterns } from '../src/RegExpI18n';
 
-const IgnoredRegexp = createRegExp('[' + Constants.IGNORABLE_SYMBOLS + ']', 'g');
+const IgnoredRegexp = createRegExp(Patterns.MATCH_IGNORABLE_SYMBOLS, 'g');
 
 function replaceIgnored(text: string): string {
     return text ? text.replace(IgnoredRegexp, '') : text;

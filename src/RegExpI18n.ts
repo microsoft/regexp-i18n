@@ -44,6 +44,7 @@ export const Ranges = {
 export const Patterns = {
     // Strict letter pattern. Won't match outstanding diacritics
     MATCH_LETTER: '[' + Constants.LETTERS + ']' + '[' + Constants.DIACRITICS + ']?',
+    MATCH_IGNORABLE_SYMBOLS: '[' + Constants.IGNORABLE_SYMBOLS + ']',
 };
 
 export function createRegExp(pattern: string, flags?: string) {
