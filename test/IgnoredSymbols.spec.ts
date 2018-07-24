@@ -34,11 +34,18 @@ describe('IgnoredSymbols', () => {
         expect(actual).toBe(original);
     });
 
-    it('Ignore doesn\'t specials', () => {
+    it('Ignore doesn\'t affect specials', () => {
         const original = '~!@#$%^&?*()_+-=`\'\";[]{}\\|/,.<>';
         const actual = replaceIgnored(original);
         expect(actual).toBe(original);
     });
+
+    it('Ignore doesn\'t affect combinded emoticons', () => {
+        const original = '‍🏳️‍🌈 👨‍👨‍👦 👩‍❤️‍💋‍👨';
+        const actual = replaceIgnored(original);
+        expect(actual).toBe(original);
+    });
+    
 
     it('Mixed test', () => {
         const original = 'af\u200ef\u200fxad';

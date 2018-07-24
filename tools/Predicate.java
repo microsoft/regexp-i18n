@@ -23,6 +23,8 @@ public interface Predicate {
 
     Predicate IGNORABLE = codepoint -> Character.isIdentifierIgnorable(codepoint);
 
+    Predicate ZERO_WIDTH_JOINER = codepoint(0x200D);
+
     Predicate LETTER = codepoint -> Character.isLetter(codepoint);
 
     Predicate DIGIT = codepoint -> Character.isDigit(codepoint);
