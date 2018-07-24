@@ -40,7 +40,7 @@ describe('IgnoredSymbols', () => {
         expect(actual).toBe(original);
     });
 
-    it('Ignore doesn\'t affect combinded emoticons', () => {
+    it('Ignore doesn\'t affect combined emoticons', () => {
         const original = '‍🏳️‍🌈 👨‍👨‍👦 👩‍❤️‍💋‍👨';
         const actual = replaceIgnored(original);
         expect(actual).toBe(original);
