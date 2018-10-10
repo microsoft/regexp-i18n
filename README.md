@@ -5,7 +5,7 @@
 Library provides range of the all letters in Unicode.
 This ranges could be used in the RegExp as a part of the range. As ranges include astral symbols from astral pages you need to pass ~u~ flag to the regexp.
 
-Library tested on latest versons of Safari, Chrome, Firefox and Edge browsers.
+Library tested on latest versions of Safari, Chrome, Firefox and Edge browsers.
 
 ## Overview
 
