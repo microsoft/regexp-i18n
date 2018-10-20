@@ -3,13 +3,13 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Microsoft/regexp-i18n/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/regexp-i18n.svg?style=flat-square)](https://www.npmjs.com/package/regexp-i18n) [![npm downloads](https://img.shields.io/npm/dm/regexp-i18n.svg?style=flat-square)](https://www.npmjs.com/package/regexp-i18n) [![Build Status](https://img.shields.io/travis/Microsoft/regexp-i18n/master.svg?style=flat-square)](https://travis-ci.org/Microsoft/regexp-i18n) [![David](https://img.shields.io/david/Microsoft/regexp-i18n.svg?style=flat-square)](https://github.com/Microsoft/regexp-i18n) [![David](https://img.shields.io/david/dev/Microsoft/regexp-i18n.svg?style=flat-square)](https://github.com/Microsoft/regexp-i18n)
 
 Library provides range of the all letters in Unicode.
-This ranges could be used in the RegExp as a part of the range. As ranges include astral symbols from astral pages you need to pass ~u~ flag to the regexp.
+This ranges could be used in the RegExp as a part of the range. As ranges include astral symbols from astral pages you need to pass `u` flag to the regexp.
 
 Library tested on latest versons of Safari, Chrome, Firefox and Edge browsers.
 
 ## Overview
 
-The library designed to provide a way to match any i18n character in any alphabet.
+The library is designed to provide a way to match any i18n character in any alphabet.
 
 The library exports following building blocks:
 
@@ -58,7 +58,7 @@ replaceNotMatching(pattern: string, replaceValue: string, text: string): string;
 ```
 
 Attempt to make a function replacing everything not matching to the pattern.
-The motivation for it that it is impossible to make an inverse `MATCH_LETTER` pattern.
+The motivation is that it is impossible to make an inverse `MATCH_LETTER` pattern.
 Not very reliable in the complex cases yet.
 
 ```typescript
