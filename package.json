@@ -11,6 +11,10 @@
     "tslint": "tslint --project tsconfig.json -r tslint.json -r ./node_modules/tslint-microsoft-contrib --fix || true",
     "build": "npm run clean && npm run tslint && tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/regexp-i18n.git"
+  },
   "keywords": [
     "regexp",
     "i18n"
